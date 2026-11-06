@@ -101,7 +101,7 @@ body.menu-open{overflow:hidden}
 .hero-bg{position:absolute;left:0;right:0;top:50%;transform:translateY(-38%);font-family:var(--f-label);font-size:clamp(150px,27vw,420px);line-height:.8;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(179,25,31,.16);pointer-events:none;user-select:none;z-index:0}
 .hero-bg span{display:inline-block;animation:drift 60s linear infinite}
 @keyframes drift{to{transform:translateX(-50%)}}
-.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.12fr .88fr;grid-template-areas:"head photo" "cta photo";column-gap:clamp(30px,5vw,80px);align-items:end}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);grid-template-areas:"head photo" "cta photo";column-gap:clamp(30px,5vw,80px);align-items:end}
 .hero-head{grid-area:head;padding-top:30px}
 .hero-photo{grid-area:photo;align-self:center}
 .hero-cta{grid-area:cta;padding-top:28px}
@@ -335,7 +335,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   body.menu-open .burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
   .nav-links{display:none}
   .hero{padding-top:100px}
-  .hero .wrap{grid-template-columns:1fr;grid-template-areas:"head" "photo" "cta"}
+  .hero .wrap{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "photo" "cta"}
   .hero-photo{justify-self:center;max-width:400px;margin-top:30px}
   .badge{left:-14px;bottom:30px;width:108px;height:108px}
   .badge text{font-size:11.5px;letter-spacing:2.6px}
@@ -358,13 +358,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .hero-cta .btns .btn{flex:1 1 100%;justify-content:center}
   .btns .btn{padding-left:20px;padding-right:20px}
   .mcta .btn{padding-left:14px;padding-right:14px;font-size:14.5px}
-  .fact small{white-space:nowrap}
   .stop{grid-template-columns:1fr}
   .thumbs{order:-1}
   .thumb{width:72px}
   .thumb.tile{display:none}
-  .facts{display:grid;grid-template-columns:repeat(3,auto);justify-content:start}
-  .fact{padding:16px 14px 0 0;margin-right:14px}
+  .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .fact{padding:16px 8px 0 0;margin-right:8px;min-width:0}
+  .fact b{font-size:24px}
+  .fact small{display:block;font-size:12px;line-height:1.3;overflow-wrap:anywhere}
   .hero-photo::before{display:none}
   .values{grid-template-columns:1fr;gap:14px}
   .mcta{display:flex}
@@ -374,6 +375,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 }
 @media (max-width:360px){
   .mcta .btn{padding-left:10px;padding-right:10px;font-size:13.5px}
+  .nav .wrap{gap:8px}
+  .nav-right{gap:8px}
+  .logo{gap:6px}
+  .logo b{font-size:20px}
+  .logo span{font-size:10px;letter-spacing:.14em}
+  .lang button{padding:6px 9px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
@@ -452,7 +459,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <a class="btn ghost" href="https://t.me/Natallia_italy"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 3.6 2.9 10.7c-1.3.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.5-1.3zM9.6 14.3l-.4 3.6-1.3-4.3 9.7-6.1c.5-.3.9 0 .5.3z"/></svg><span>Telegram</span></a>
       </div>
       <div class="facts">
-        <div class="fact"><b data-i18n="f1b">3 ч</b><small data-i18n="f1s">продолжительность</small></div>
+        <div class="fact"><b data-i18n="f1b">3 ч</b><small data-i18n="f1s">длительность</small></div>
         <div class="fact"><b data-i18n="f2b">4 км</b><small data-i18n="f2s">пешком по центру</small></div>
         <div class="fact"><b data-i18n="f3b">RU · EN</b><small data-i18n="f3s">языки экскурсий</small></div>
       </div>
@@ -719,7 +726,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       cta_short:"Записаться",cta_wa:"Записаться в WhatsApp",cta_book:"Хочу на экскурсию",cta_price:"Узнать стоимость",cta_route:"Смотреть маршрут",cta_more:"Узнать подробнее",cta_gift:"Подарить экскурсию",cta_ig:"Instagram Натальи",
       hero_eyebrow:"Гид по Палермо · Сицилия",hero_l1:"Прогулки по",hero_l2:"Палермо",hero_l3:"с Натальей",
       hero_lede:"Арабо-норманнский собор, барочные церкви, шумный рынок Капо и площади старого города. Индивидуально или большой компанией, в спокойном темпе и с живым рассказом о городе, который сложно не полюбить.",
-      f1b:"3 ч",f1s:"продолжительность",f2b:"4 км",f2s:"пешком по центру",f3b:"RU · EN",f3s:"языки экскурсий",
+      f1b:"3 ч",f1s:"длительность",f2b:"4 км",f2s:"пешком по центру",f3b:"RU · EN",f3s:"языки экскурсий",
       tours_eyebrow:"Экскурсии",tours_title:"Выберите свою прогулку",tours_lead:"Индивидуальные экскурсии и экскурсии для больших групп: без спешки и без заученного текста. Провожу их на русском или английском, в зависимости от аудитории.",
       t1_tag:"Пешеходная · около 3 часов",t1_title:"Обзорная экскурсия по Палермо",
       t1_desc:"Главные сокровища исторического центра за одно утро: от Театра Массимо и рынка Капо до Кафедрального собора, площади Претория и барочных интерьеров, от которых захватывает дух.",
