@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Natallia · Палермо</title>
+<meta name="description" content="Обзорная экскурсия по Палермо с гидом Натальей: собор, рынок Капо, площадь Претория, Марторана, барокко. Небольшие группы, 3 часа, 190 € за группу до 6 человек.">
+<meta property="og:title" content="Прогулки по Палермо с Натальей">
+<meta property="og:description" content="Авторская обзорная экскурсия по историческому центру Палермо для небольших групп.">
+<meta property="og:image" content="img/hero.jpg">
+<meta name="theme-color" content="#EEE3D1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Manrope:wght@400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: Palermo limestone page; photos framed as Arab‑Norman arches; one bold moment — the hero with the giant "Palermo" and the red coat; majolica tiles as the only ornament. */
+:root{
+  --stone:#EEE3D1;      /* limestone of Palermo */
+  --stone-2:#E3D3BB;    /* shaded stone */
+  --ink:#1E1814;        /* warm night ink */
+  --red:#B3191F;        /* Natallia's coat */
+  --teal:#1F5C58;       /* majolica of the cathedral domes */
+  --gold:#C29A52;       /* baroque gilding */
+  --muted:#6B5E52;
+  --line:rgba(30,24,20,.14);
+
+  --f-display:"Prata","Didot","Bodoni 72",Georgia,serif;
+  --f-label:"Forum","Trajan Pro",Georgia,serif;
+  --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+
+  --wrap:1240px;
+  --gut:clamp(18px,4vw,48px);
+  --ease:cubic-bezier(.2,.7,.1,1);
+  color-scheme:light dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--stone);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.05;text-wrap:balance}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+.eyebrow{font-family:var(--f-label);text-transform:uppercase;letter-spacing:.22em;font-size:14px;color:var(--red);display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:"";width:34px;height:1px;background:currentColor}
+.section{padding:clamp(72px,11vw,140px) 0}
+.h2{font-size:clamp(38px,6vw,76px)}
+.lead{font-size:clamp(17px,1.5vw,20px);color:var(--muted);max-width:60ch}
+
+/* majolica tile (inspired by the striped domes) */
+.tiles{
+  --tile:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Crect width='44' height='44' fill='%231F5C58'/%3E%3Cpath d='M22 3 C30 12 32 14 41 22 C32 30 30 32 22 41 C14 32 12 30 3 22 C12 14 14 12 22 3Z' fill='%23EEE3D1'/%3E%3Cpath d='M22 11 C27 17 27 17 33 22 C27 27 27 27 22 33 C17 27 17 27 11 22 C17 17 17 17 22 11Z' fill='%23C29A52'/%3E%3Ccircle cx='22' cy='22' r='4' fill='%23B3191F'/%3E%3Ccircle cx='0' cy='0' r='5' fill='%23EEE3D1'/%3E%3Ccircle cx='44' cy='0' r='5' fill='%23EEE3D1'/%3E%3Ccircle cx='0' cy='44' r='5' fill='%23EEE3D1'/%3E%3Ccircle cx='44' cy='44' r='5' fill='%23EEE3D1'/%3E%3C/svg%3E");
+  background:var(--tile) repeat;background-size:44px 44px}
+.band{height:22px}
+
+/* arch frame */
+.arch{border-radius:999px 999px 18px 18px;overflow:hidden;position:relative;isolation:isolate}
+.arch img{width:100%;height:100%;object-fit:cover}
+
+/* buttons */
+.btn{--bg:var(--ink);--fg:var(--stone);position:relative;display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:999px;background:var(--bg);color:var(--fg);text-decoration:none;font-weight:600;font-size:15px;letter-spacing:.01em;overflow:hidden;border:1px solid var(--bg);transition:transform .35s var(--ease);white-space:nowrap}
+.btn svg{width:19px;height:19px;flex:none}
+.btn::after{content:"";position:absolute;inset:0;background:var(--red);transform:translateY(101%);transition:transform .45s var(--ease);z-index:0}
+.btn > *{position:relative;z-index:1}
+.btn:hover::after{transform:none}
+.btn:hover{transform:translateY(-2px);border-color:var(--red)}
+.btn.red{--bg:var(--red)}
+.btn.red::after{background:var(--ink)}
+.btn.red:hover{border-color:var(--ink)}
+.btn.ghost{--bg:transparent;--fg:var(--ink);border-color:var(--ink)}
+.btn.ghost:hover{color:var(--stone)}
+.btn.light{--bg:var(--stone);--fg:var(--ink)}
+.btn.light:hover{color:var(--stone)}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+
+/* NAV */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .4s,box-shadow .4s,transform .4s var(--ease)}
+.nav.scrolled{background:rgba(238,227,209,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px;gap:20px}
+.logo{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+.logo b{font-family:var(--f-display);font-weight:400;font-size:25px}
+.logo span{font-family:var(--f-label);text-transform:uppercase;letter-spacing:.24em;font-size:12px;color:var(--red)}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{text-decoration:none;font-size:15px;font-weight:500;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.lang{display:flex;border:1px solid var(--ink);border-radius:999px;padding:3px;font-family:var(--f-label);letter-spacing:.12em;font-size:13px}
+.lang button{background:none;border:0;padding:6px 11px;border-radius:999px;cursor:pointer;color:var(--ink);font:inherit;transition:background .3s,color .3s}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--stone)}
+.nav .btn{padding:11px 18px;font-size:14px}
+
+/* HERO */
+.hero{position:relative;padding:118px 0 70px;overflow:hidden}
+.hero-bg{position:absolute;left:0;right:0;top:50%;transform:translateY(-38%);font-family:var(--f-label);font-size:clamp(150px,27vw,420px);line-height:.8;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(179,25,31,.16);pointer-events:none;user-select:none;z-index:0}
+.hero-bg span{display:inline-block;animation:drift 60s linear infinite}
+@keyframes drift{to{transform:translateX(-50%)}}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.12fr .88fr;grid-template-areas:"head photo" "cta photo";column-gap:clamp(30px,5vw,80px);align-items:end}
+.hero-head{grid-area:head;padding-top:30px}
+.hero-photo{grid-area:photo;align-self:center}
+.hero-cta{grid-area:cta;padding-top:28px}
+.hero h1{margin-top:22px}
+.h1-sm{display:block;font-size:clamp(26px,3.4vw,46px);color:var(--muted)}
+.h1-xl{display:block;white-space:nowrap;font-size:clamp(64px,9.6vw,148px);line-height:.92;letter-spacing:-.02em;color:var(--red);margin:.04em 0 .06em -.04em}
+.h1-xl .ch{display:inline-block;animation:rise 1.1s var(--ease) both}
+@keyframes rise{from{transform:translateY(60%);opacity:0;filter:blur(6px)}}
+.hero-cta p{max-width:46ch;color:var(--muted);font-size:clamp(16px,1.35vw,19px)}
+.hero-cta .btns{margin-top:28px}
+.facts{display:flex;flex-wrap:wrap;gap:0;margin-top:40px;border-top:1px solid var(--line)}
+.fact{padding:18px 28px 0 0;margin-right:28px;border-right:1px solid var(--line)}
+.fact:last-child{border-right:0;margin-right:0}
+.fact b{display:block;font-family:var(--f-display);font-weight:400;font-size:clamp(26px,2.6vw,36px);line-height:1}
+.fact small{font-size:13px;color:var(--muted);letter-spacing:.02em}
+
+.hero-photo{position:relative;width:100%;max-width:470px;justify-self:end}
+.hero-photo .arch{aspect-ratio:3/4.3;box-shadow:0 40px 80px -40px rgba(30,24,20,.55);animation:unveil 1.5s .15s var(--ease) both}
+.hero-photo .arch img{transform:scale(1.12);animation:zoom 2.2s .15s var(--ease) forwards;will-change:transform}
+@keyframes unveil{from{clip-path:inset(100% 0 0 0 round 999px 999px 18px 18px)}to{clip-path:inset(0 0 0 0 round 999px 999px 18px 18px)}}
+@keyframes zoom{to{transform:scale(1.02)}}
+.hero-photo::before{content:"";position:absolute;inset:-14px;border:1px solid var(--red);border-radius:999px 999px 26px 26px;z-index:-1;opacity:.45;pointer-events:none}
+.badge{position:absolute;left:-46px;bottom:60px;width:132px;height:132px;border-radius:50%;background:var(--stone);display:grid;place-items:center;box-shadow:0 18px 40px -18px rgba(30,24,20,.5);animation:pop .9s 1.1s var(--ease) both}
+.badge svg{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);animation:spin 26s linear infinite}
+.badge text{font-family:var(--f-label);font-size:12.6px;letter-spacing:3.2px;fill:var(--ink);text-transform:uppercase}
+.badge i{font-style:normal;font-family:var(--f-display);font-size:30px;color:var(--red)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pop{from{transform:scale(.4);opacity:0}}
+.fade-up{animation:fadeUp 1s var(--ease) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}}
+
+/* MARQUEE */
+.marquee{overflow:hidden;padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.track{display:flex;gap:18px;width:max-content;animation:scroll 55s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.track figure{height:clamp(170px,22vw,260px);flex:none;border-radius:14px;overflow:hidden}
+.track figure:nth-child(3n+1){border-radius:999px 999px 14px 14px}
+.track img{height:100%;width:auto;transition:transform .8s var(--ease)}
+.track figure:hover img{transform:scale(1.06)}
+@keyframes scroll{to{transform:translateX(calc(-50% - 9px))}}
+
+/* TOURS */
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;margin-bottom:clamp(40px,6vw,70px)}
+.sec-head .h2{margin-top:18px}
+.tour{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,70px);align-items:center;padding:clamp(22px,3vw,34px);background:#F5ECDD;border:1px solid var(--line);border-radius:28px}
+.tour + .tour{margin-top:28px}
+.tour-img{aspect-ratio:4/5;max-height:620px}
+.tour-img img{transition:transform 1.2s var(--ease)}
+.tour:hover .tour-img img{transform:scale(1.05)}
+.tag{display:inline-flex;gap:10px;font-family:var(--f-label);text-transform:uppercase;letter-spacing:.18em;font-size:13px;color:var(--teal)}
+.tour h3{font-size:clamp(32px,4vw,52px);margin:14px 0 16px}
+.tour p{color:var(--muted);max-width:54ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;list-style:none}
+.chips li{font-size:14px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--stone)}
+.price{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin:30px 0 8px;padding-top:24px;border-top:1px solid var(--line)}
+.price b{font-family:var(--f-display);font-weight:400;font-size:clamp(46px,5vw,64px);line-height:.9;color:var(--red)}
+.price b.small{font-size:clamp(30px,3.4vw,42px)}
+.price span{font-size:15px;color:var(--muted);padding-bottom:6px}
+.note{font-size:14px;color:var(--muted);margin-bottom:26px}
+.tour .btns{margin-top:6px}
+.tour.alt{grid-template-columns:1.1fr .9fr}
+.tour.alt .tour-img{order:2}
+
+/* ROUTE */
+.route{background:var(--stone-2);position:relative}
+.route-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,6vw,90px)}
+.route-side{position:sticky;top:110px;align-self:start}
+.route-side .h2{margin:18px 0 22px}
+.when{display:grid;gap:18px;margin-top:36px}
+.when div{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start}
+.when svg{width:42px;height:42px;padding:10px;border-radius:50%;background:var(--stone);color:var(--red)}
+.when b{display:block;font-weight:600;font-size:15px}
+.when span{font-size:15px;color:var(--muted)}
+.stops{list-style:none;position:relative;padding-left:clamp(56px,7vw,84px)}
+.stops::before,.stops .progress{content:"";position:absolute;left:clamp(21px,2.6vw,30px);top:12px;bottom:12px;width:1px;background:var(--line)}
+.stops .progress{background:var(--red);transform-origin:top;transform:scaleY(var(--p,1));width:2px;margin-left:-.5px}
+.stop{position:relative;display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;padding:26px 0;border-bottom:1px solid var(--line)}
+.stop:last-child{border-bottom:0}
+.stop .n{position:absolute;left:calc(-1 * clamp(56px,7vw,84px));top:28px;width:clamp(42px,5.2vw,60px);height:clamp(42px,5.2vw,60px);border-radius:50%;background:var(--stone);border:1px solid var(--line);display:grid;place-items:center;font-family:var(--f-display);font-size:clamp(17px,2vw,22px);transition:background .4s,color .4s,border-color .4s}
+.stop.on .n{background:var(--red);color:var(--stone);border-color:var(--red)}
+.stop h3{font-size:clamp(23px,2.4vw,31px);margin-bottom:6px}
+.stop p{font-size:15.5px;color:var(--muted);max-width:52ch}
+.stop .kind{font-family:var(--f-label);text-transform:uppercase;letter-spacing:.16em;font-size:12px;color:var(--teal);display:block;margin-bottom:8px}
+.stop .chips{margin-top:12px}
+.stop .chips li{background:transparent;font-size:13px;padding:5px 12px}
+.thumbs{display:flex;gap:8px}
+.thumb{width:clamp(78px,9vw,112px);aspect-ratio:3/4;border-radius:999px 999px 10px 10px;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.stop:hover .thumb img{transform:scale(1.08)}
+.thumb.tile{border:1px solid var(--line);background-size:26px 26px;opacity:.8}
+
+/* BAROQUE BAND */
+.baroque{position:relative;min-height:clamp(380px,62vw,620px);display:grid;place-items:center;overflow:hidden;color:var(--stone);text-align:center}
+.baroque img{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;will-change:transform}
+.baroque::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,24,20,.35),rgba(30,24,20,.62))}
+.baroque .wrap{position:relative;z-index:1}
+.baroque blockquote{font-family:var(--f-display);font-size:clamp(34px,5.6vw,74px);line-height:1.08;max-width:17ch;margin:0 auto;text-wrap:balance}
+.baroque cite{display:block;margin-top:26px;font-style:normal;font-family:var(--f-label);letter-spacing:.24em;text-transform:uppercase;font-size:14px;color:var(--gold)}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(34px,7vw,110px);align-items:center}
+.about-img{aspect-ratio:3/4.2;max-width:480px}
+.about h2{margin:18px 0 6px}
+.about .role{font-family:var(--f-label);letter-spacing:.2em;text-transform:uppercase;font-size:14px;color:var(--muted)}
+.about-text{margin-top:30px;display:grid;gap:18px;font-size:clamp(16.5px,1.4vw,19px);max-width:58ch}
+.about-text p:first-child::first-letter{font-family:var(--f-display);float:left;font-size:4.2em;line-height:.82;padding:.06em .1em 0 0;color:var(--red)}
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.values div{padding-top:16px;border-top:2px solid var(--red)}
+.values b{display:block;font-family:var(--f-display);font-weight:400;font-size:21px;margin-bottom:4px}
+.values span{font-size:14.5px;color:var(--muted)}
+.about .btns{margin-top:38px}
+
+/* GIFT */
+.gift{background:var(--ink);color:var(--stone);position:relative;overflow:hidden}
+.gift .eyebrow{color:var(--gold)}
+.gift-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,100px);align-items:center}
+.gift .h2{margin:18px 0 22px}
+.gift .lead{color:rgba(238,227,209,.72)}
+.steps{list-style:none;display:grid;gap:0;margin:38px 0 40px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:56px 1fr;align-items:baseline;padding:18px 0;border-top:1px solid rgba(238,227,209,.16)}
+.steps li::before{content:"0" counter(s);font-family:var(--f-display);font-size:22px;color:var(--gold)}
+.steps b{display:block;font-weight:600}
+.steps span{color:rgba(238,227,209,.65);font-size:15px}
+.cert-wrap{perspective:1200px;display:grid;place-items:center}
+.cert{width:min(100%,500px);aspect-ratio:1.42;border-radius:18px;padding:14px;transform:rotate(-4deg);transition:transform .6s var(--ease);box-shadow:0 50px 90px -30px rgba(0,0,0,.7);will-change:transform}
+.cert-in{height:100%;background:var(--stone);color:var(--ink);border-radius:10px;padding:clamp(20px,4vw,34px);display:flex;flex-direction:column;justify-content:space-between;position:relative;outline:1px solid var(--gold);outline-offset:-10px}
+.cert-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;font-family:var(--f-label);letter-spacing:.2em;text-transform:uppercase;font-size:clamp(10px,1.4vw,12px);color:var(--teal)}
+.seal{width:clamp(48px,7vw,64px);height:clamp(48px,7vw,64px);border-radius:50%;background:var(--red);color:var(--stone);display:grid;place-items:center;font-family:var(--f-display);font-size:clamp(18px,2.6vw,24px);letter-spacing:0;flex:none;box-shadow:inset 0 0 0 3px rgba(238,227,209,.35)}
+.cert h3{font-size:clamp(24px,3.4vw,38px);line-height:1.05}
+.cert h3 small{display:block;font-family:var(--f-label);font-size:.42em;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.cert-bot{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;font-size:clamp(11px,1.5vw,13px);color:var(--muted)}
+.cert-bot .for{flex:1;border-bottom:1px solid var(--ink);padding-bottom:4px;max-width:60%}
+.cert-bot .sign{font-family:var(--f-display);font-size:clamp(15px,2vw,19px);color:var(--ink)}
+
+/* CONTACT */
+.contact{text-align:center}
+.contact .eyebrow{justify-content:center}
+.contact .eyebrow::after{content:"";width:34px;height:1px;background:currentColor}
+.ciao{font-size:clamp(56px,11vw,150px);color:var(--red);margin:18px 0 14px;letter-spacing:-.01em}
+.contact .lead{margin:0 auto}
+.channels{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:clamp(40px,6vw,64px);text-align:left}
+.ch-card{display:flex;flex-direction:column;gap:30px;padding:26px;border-radius:24px;border:1px solid var(--line);background:#F5ECDD;text-decoration:none;position:relative;overflow:hidden;transition:transform .5s var(--ease),border-color .4s,color .4s}
+.ch-card::before{content:"";position:absolute;inset:0;background:var(--c,var(--ink));transform:translateY(101%);transition:transform .55s var(--ease)}
+.ch-card > *{position:relative}
+.ch-card:hover{transform:translateY(-6px);color:var(--stone);border-color:transparent}
+.ch-card:hover::before{transform:none}
+.ch-card .ico{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:#fff;transition:background .4s,color .4s}
+.ch-card:hover .ico{background:var(--stone);color:var(--c)}
+.ch-card .ico svg{width:26px;height:26px}
+.ch-card b{display:block;font-family:var(--f-display);font-weight:400;font-size:28px}
+.ch-card span{font-size:15px;opacity:.75;word-break:break-word}
+.ch-card .arrow{position:absolute;top:26px;right:26px;width:22px;height:22px;transition:transform .5s var(--ease)}
+.ch-card:hover .arrow{transform:rotate(45deg)}
+.wa{--c:#1E8E4E}.tg{--c:#2A8BC9}.ig{--c:#B3191F}
+
+footer{padding:34px 0 40px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* sticky mobile CTA */
+.mcta{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;display:none;gap:8px;transform:translateY(140%);transition:transform .5s var(--ease)}
+.mcta.show{transform:none}
+.mcta .btn{flex:1;justify-content:center;box-shadow:0 14px 30px -12px rgba(30,24,20,.6)}
+.mcta .btn.sq{flex:0 0 52px;padding:0}
+
+/* scroll reveal — only applied by JS to elements below the first screen */
+.rv-pending{opacity:0;transform:translateY(34px)}
+.rv{transition:opacity 1s var(--ease),transform 1s var(--ease)}
+
+/* RESPONSIVE */
+@media (max-width:980px){
+  .nav-links{display:none}
+  .hero{padding-top:100px}
+  .hero .wrap{grid-template-columns:1fr;grid-template-areas:"head" "photo" "cta"}
+  .hero-photo{justify-self:center;max-width:400px;margin-top:30px}
+  .badge{left:-14px;bottom:30px;width:108px;height:108px}
+  .badge text{font-size:11.5px;letter-spacing:2.6px}
+  .tour,.tour.alt{grid-template-columns:1fr}
+  .tour.alt .tour-img{order:0}
+  .tour-img{aspect-ratio:4/3.4;border-radius:999px 999px 18px 18px}
+  .route-grid,.about-grid,.gift-grid{grid-template-columns:1fr}
+  .route-side{position:static}
+  .about-img{max-width:420px;margin:0 auto;width:100%}
+  .channels{grid-template-columns:1fr}
+  .cert-wrap{margin-top:10px}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .h1-xl{font-size:19.5vw}
+  .nav .wrap{height:64px}
+  .nav .btn.nav-wa{display:none}
+  .logo b{font-size:22px}
+  .hero{padding:90px 0 50px}
+  .hero-cta .btns .btn{flex:1;justify-content:center}
+  .stop{grid-template-columns:1fr}
+  .thumbs{order:-1}
+  .thumb{width:72px}
+  .thumb.tile{display:none}
+  .facts{display:grid;grid-template-columns:repeat(3,auto);justify-content:start}
+  .fact{padding:16px 14px 0 0;margin-right:14px}
+  .hero-photo::before{display:none}
+  .values{grid-template-columns:1fr;gap:14px}
+  .mcta{display:flex}
+  footer{padding-bottom:90px}
+  .tour{padding:14px;border-radius:22px}
+  .tour > div:last-child{padding:4px 8px 12px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .rv-pending{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Natallia · Palermo"><b>Natallia</b><span>Palermo</span></a>
+    <ul class="nav-links">
+      <li><a href="#tours" data-i18n="nav_tours">Экскурсии</a></li>
+      <li><a href="#route" data-i18n="nav_route">Маршрут</a></li>
+      <li><a href="#about" data-i18n="nav_about">О себе</a></li>
+      <li><a href="#gift" data-i18n="nav_gift">Подарок</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Контакты</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="ru" aria-pressed="true">RU</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn red nav-wa" data-wa="book" href="#"><span data-i18n="cta_short">Записаться</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"><span>PALERMO · SICILIA · PALERMO · SICILIA · </span></div>
+  <div class="wrap">
+    <div class="hero-head">
+      <p class="eyebrow fade-up" data-i18n="hero_eyebrow">Гид по Палермо · Сицилия</p>
+      <h1>
+        <span class="h1-sm fade-up" style="animation-delay:.1s" data-i18n="hero_l1">Прогулки по</span>
+        <span class="h1-xl" id="bigword" data-i18n="hero_l2">Палермо</span>
+        <span class="h1-sm fade-up" style="animation-delay:.7s" data-i18n="hero_l3">с Натальей</span>
+      </h1>
+    </div>
+
+    <figure class="hero-photo">
+      <div class="arch"><img id="heroImg" src="img/hero.jpg" alt="Наталья, гид в Палермо" width="1133" height="1700" fetchpriority="high"></div>
+      <div class="badge" aria-hidden="true">
+        <svg viewBox="0 0 120 120"><defs><path id="circ" d="M60,60 m-48,0 a48,48 0 1,1 96,0 a48,48 0 1,1 -96,0"/></defs><text><textPath href="#circ">Benvenuti · Palermo · Sicilia ·</textPath></text></svg>
+        <i>N</i>
+      </div>
+    </figure>
+
+    <div class="hero-cta fade-up" style="animation-delay:.9s">
+      <p data-i18n="hero_lede">Арабо-норманнский собор, барочные церкви, шумный рынок Капо и площади старого города. Небольшая группа, спокойный темп и живой рассказ о городе, который сложно не полюбить.</p>
+      <div class="btns">
+        <a class="btn red" data-wa="book" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg><span data-i18n="cta_wa">Записаться в WhatsApp</span></a>
+        <a class="btn ghost" href="https://t.me/Natallia_italy"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 3.6 2.9 10.7c-1.3.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.5-1.3zM9.6 14.3l-.4 3.6-1.3-4.3 9.7-6.1c.5-.3.9 0 .5.3z"/></svg><span>Telegram</span></a>
+      </div>
+      <div class="facts">
+        <div class="fact"><b data-i18n="f1b">3 ч</b><small data-i18n="f1s">продолжительность</small></div>
+        <div class="fact"><b data-i18n="f2b">4 км</b><small data-i18n="f2s">пешком по центру</small></div>
+        <div class="fact"><b data-i18n="f3b">до 6</b><small data-i18n="f3s">человек в группе</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="band tiles" aria-hidden="true"></div>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="track" id="track">
+    <figure><img src="img/g1.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g3.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g4.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g5.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g7.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g8.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g6.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g2.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g9.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g10.jpg" alt="" loading="lazy"></figure>
+  </div>
+</div>
+
+<!-- TOURS -->
+<section class="section" id="tours">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="eyebrow" data-i18n="tours_eyebrow">Экскурсии</p>
+        <h2 class="h2" data-i18n="tours_title">Выберите свою прогулку</h2>
+      </div>
+      <p class="lead" data-i18n="tours_lead">Индивидуальные экскурсии для вас и ваших близких: без толпы, без спешки и без заученного текста.</p>
+    </div>
+
+    <article class="tour rv">
+      <div class="tour-img arch"><img src="img/tour-palermo.jpg" alt="Кафедральный собор Палермо" loading="lazy"></div>
+      <div>
+        <span class="tag" data-i18n="t1_tag">Пешеходная · около 3 часов</span>
+        <h3 data-i18n="t1_title">Обзорная экскурсия по Палермо</h3>
+        <p data-i18n="t1_desc">Главные сокровища исторического центра за одно утро: от Театра Массимо и рынка Капо до Кафедрального собора, площади Претория и барочных интерьеров, от которых захватывает дух.</p>
+        <ul class="chips">
+          <li data-i18n="c1">Театр Массимо</li>
+          <li data-i18n="c2">Рынок Капо</li>
+          <li data-i18n="c3">Кафедральный собор</li>
+          <li data-i18n="c4">Площадь Претория</li>
+          <li data-i18n="c5">Четыре угла</li>
+          <li data-i18n="c6">Марторана</li>
+          <li data-i18n="c7">+ 2 барочные жемчужины</li>
+        </ul>
+        <div class="price"><b>190 €</b><span data-i18n="t1_price">за группу до 6 человек</span></div>
+        <p class="note" data-i18n="t1_note">Если вас больше шести, цена обсуждается отдельно: для большой группы подключается аудиосистема с микрофоном.</p>
+        <div class="btns">
+          <a class="btn red" data-wa="book" href="#"><span data-i18n="cta_book">Хочу на экскурсию</span></a>
+          <a class="btn ghost" href="#route"><span data-i18n="cta_route">Смотреть маршрут</span></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="tour alt rv">
+      <div class="tour-img arch"><img src="img/tour-around.jpg" alt="Замок на скале в окрестностях Палермо" loading="lazy"></div>
+      <div>
+        <span class="tag" data-i18n="t2_tag">С трансфером · до 4 человек</span>
+        <h3 data-i18n="t2_title">Палермо и окрестности</h3>
+        <p data-i18n="t2_desc">Расширенная программа для небольшой компании: Палермо и городки в его окрестностях, с трансфером. Отличный вариант, если хочется увидеть больше, чем исторический центр.</p>
+        <div class="price"><b class="small" data-i18n="t2_price_b">По запросу</b><span data-i18n="t2_price">маршрут и стоимость в переписке</span></div>
+        <p class="note">&nbsp;</p>
+        <div class="btns">
+          <a class="btn" data-wa="around" href="#"><span data-i18n="cta_more">Узнать подробнее</span></a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ROUTE -->
+<section class="section route" id="route">
+  <div class="wrap route-grid">
+    <aside class="route-side rv">
+      <p class="eyebrow" data-i18n="route_eyebrow">Маршрут</p>
+      <h2 class="h2" data-i18n="route_title">Семь остановок старого Палермо</h2>
+      <p class="lead" data-i18n="route_lead">Около четырёх километров неспешным шагом: улицы, рынок, площади и церкви, в которые стоит заглянуть.</p>
+      <div class="when">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><p><b data-i18n="w1b">Начало в 10:00 или 10:30</b><span data-i18n="w1s">Продолжительность около 3 часов</span></p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 16c3 0 4-2 6-2s3 3 6 3h4v2H4z"/><path d="M6 14l1-6 4 2 3-1"/></svg><p><b data-i18n="w2b">Удобная обувь</b><span data-i18n="w2s">И вода: её можно купить по дороге</span></p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3l7 4v4c0 5-3 8-7 10-4-2-7-5-7-10V7z"/></svg><p><b data-i18n="w3b">Плечи и колени закрыты</b><span data-i18n="w3s">Желательно для посещения церквей</span></p></div>
+      </div>
+    </aside>
+
+    <ol class="stops" id="stops">
+      <span class="progress" id="progress" aria-hidden="true"></span>
+      <li class="stop rv"><span class="n">1</span>
+        <div><span class="kind" data-i18n="k_out">Внешний осмотр</span><h3 data-i18n="s1">Театр Массимо</h3><p data-i18n="s1d">Крупнейший оперный театр Италии и одна из визитных карточек Палермо.</p></div>
+        <div class="thumbs"><div class="thumb tile tiles"></div></div>
+      </li>
+      <li class="stop rv"><span class="n">2</span>
+        <div><span class="kind" data-i18n="k_visit">Посещение</span><h3 data-i18n="s2">Исторический рынок Капо</h3><p data-i18n="s2d">Прилавки, ароматы и голоса старого города: место, где Палермо живёт каждый день.</p></div>
+        <div class="thumbs"><div class="thumb tile tiles"></div></div>
+      </li>
+      <li class="stop rv"><span class="n">3</span>
+        <div><span class="kind" data-i18n="k_visit">Посещение</span><h3 data-i18n="s3">Кафедральный собор</h3><p data-i18n="s3d">Главный храм города, в облике которого соединились арабо-норманнские, готические и классические черты.</p></div>
+        <div class="thumbs"><div class="thumb"><img src="img/cathedral.jpg" alt="" loading="lazy"></div></div>
+      </li>
+      <li class="stop rv"><span class="n">4</span>
+        <div><span class="kind" data-i18n="k_out">Внешний осмотр</span><h3 data-i18n="s4">Площадь Претория и Четыре угла</h3><p data-i18n="s4d">Фонтан Претория с его скульптурами и барочный перекрёсток Куаттро Канти в самом сердце старого города.</p></div>
+        <div class="thumbs"><div class="thumb"><img src="img/pretoria.jpg" alt="" loading="lazy"></div><div class="thumb"><img src="img/quattro-canti.jpg" alt="" loading="lazy"></div></div>
+      </li>
+      <li class="stop rv"><span class="n">5</span>
+        <div><span class="kind" data-i18n="k_visit">Посещение</span><h3 data-i18n="s5">Церковь Марторана</h3><p data-i18n="s5d">Знаменитые византийские мозаики XII века.</p>
+          <ul class="chips"><li data-i18n="s5c1">Билет 3 €</li><li data-i18n="s5c2">Вход до 13:00</li><li data-i18n="s5c3">В воскресенье закрыта</li></ul></div>
+        <div class="thumbs"><div class="thumb"><img src="img/martorana.jpg" alt="" loading="lazy"></div></div>
+      </li>
+      <li class="stop rv"><span class="n">6</span>
+        <div><span class="kind" data-i18n="k_visit">Посещение</span><h3 data-i18n="s6">Церковь св. Екатерины Александрийской</h3><p data-i18n="s6d">Яркий пример искусства эпохи барокко, XVI век.</p>
+          <ul class="chips"><li data-i18n="s6c1">Билет 2 €</li></ul></div>
+        <div class="thumbs"><div class="thumb tile tiles"></div></div>
+      </li>
+      <li class="stop rv"><span class="n">7</span>
+        <div><span class="kind" data-i18n="k_visit">Посещение</span><h3 data-i18n="s7">Ораторий Сан-Лоренцо</h3><p data-i18n="s7d">Барокко, переходящее в рококо, и скульптуры XVII века.</p>
+          <ul class="chips"><li data-i18n="s5c1">Билет 3 €</li></ul></div>
+        <div class="thumbs"><div class="thumb tile tiles"></div></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- BAROQUE BAND -->
+<section class="baroque" aria-label="Палермо">
+  <img id="parImg" src="img/baroque.jpg" alt="" loading="lazy">
+  <div class="wrap rv">
+    <blockquote data-i18n="quote">Три часа, и Палермо становится вашим городом</blockquote>
+    <cite>Palermo · Sicilia</cite>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-img arch rv"><img src="img/about.jpg" alt="Наталья на площади в Палермо" loading="lazy"></div>
+    <div class="rv">
+      <p class="eyebrow" data-i18n="about_eyebrow">О себе</p>
+      <h2 class="h2" data-i18n="about_name">Наталья</h2>
+      <p class="role" data-i18n="about_role">Гид по Палермо и окрестностям</p>
+      <!-- ЗАГЛУШКА: заменить текстом Натальи -->
+      <div class="about-text">
+        <p data-i18n="about_p1">Здравствуйте! Меня зовут Наталья, и я провожу экскурсии по Палермо и его окрестностям. Я покажу вам город не по путеводителю: с его рынками, барокко, арабо-норманнскими соборами и историями, которые прячутся в переулках.</p>
+        <p data-i18n="about_p2">Я работаю с небольшими группами, поэтому на прогулке есть время на вопросы, фотографии и чашку кофе по дороге. Напишите мне, и мы вместе подберём удобный день.</p>
+      </div>
+      <div class="values">
+        <div><b data-i18n="v1b">Небольшие группы</b><span data-i18n="v1s">До шести человек, только вы и ваши близкие</span></div>
+        <div><b data-i18n="v2b">Спокойный темп</b><span data-i18n="v2s">Без спешки, с остановками для фото</span></div>
+        <div><b data-i18n="v3b">На связи</b><span data-i18n="v3s">WhatsApp, Telegram и Instagram</span></div>
+      </div>
+      <div class="btns">
+        <a class="btn ghost" href="https://instagram.com/natallia_antyhina"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span data-i18n="cta_ig">Instagram Натальи</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GIFT -->
+<section class="section gift" id="gift">
+  <div class="wrap gift-grid">
+    <div class="rv">
+      <p class="eyebrow" data-i18n="gift_eyebrow">Подарок</p>
+      <h2 class="h2" data-i18n="gift_title">Подарите прогулку по Палермо</h2>
+      <p class="lead" data-i18n="gift_lead">Экскурсия в подарок для мамы, подруги, любимого человека или друзей, которые собираются на Сицилию. Подарок, который запомнится надолго.</p>
+      <ol class="steps">
+        <li><p><b data-i18n="g1b">Напишите мне</b><span data-i18n="g1s">В WhatsApp или Telegram, кому хотите сделать подарок</span></p></li>
+        <li><p><b data-i18n="g2b">Обсудим детали</b><span data-i18n="g2s">Формат экскурсии и примерные даты поездки</span></p></li>
+        <li><p><b data-i18n="g3b">Дарите</b><span data-i18n="g3s">Красивый сертификат для вашего близкого человека</span></p></li>
+      </ol>
+      <div class="btns">
+        <a class="btn light" data-wa="gift" href="#"><span data-i18n="cta_gift">Подарить экскурсию</span></a>
+      </div>
+    </div>
+    <div class="cert-wrap rv">
+      <div class="cert tiles" id="cert">
+        <div class="cert-in">
+          <div class="cert-top"><span>Certificato regalo<br>Palermo · Sicilia</span><span class="seal">N</span></div>
+          <h3><small data-i18n="cert_s">Подарочный сертификат</small><span data-i18n="cert_t">Прогулка по Палермо</span></h3>
+          <div class="cert-bot"><span class="for" data-i18n="cert_for">Для</span><span class="sign">Natallia</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact" id="contact">
+  <div class="wrap">
+    <div class="rv">
+      <p class="eyebrow" data-i18n="contact_eyebrow">Контакты</p>
+      <h2 class="ciao">Ci vediamo!</h2>
+      <p class="lead" data-i18n="contact_lead">До встречи в Палермо. Напишите в удобный мессенджер: расскажите, сколько вас и когда вы планируете приехать.</p>
+    </div>
+    <div class="channels">
+      <a class="ch-card wa rv" data-wa="book" href="#">
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg></span>
+        <div><b>WhatsApp</b><span>+39 327 532 7316</span></div>
+      </a>
+      <a class="ch-card tg rv" href="https://t.me/Natallia_italy">
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 3.6 2.9 10.7c-1.3.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.5-1.3zM9.6 14.3l-.4 3.6-1.3-4.3 9.7-6.1c.5-.3.9 0 .5.3z"/></svg></span>
+        <div><b>Telegram</b><span>@Natallia_italy</span></div>
+      </a>
+      <a class="ch-card ig rv" href="https://instagram.com/natallia_antyhina">
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+        <div><b>Instagram</b><span>@natallia_antyhina</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="band tiles" aria-hidden="true"></div>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Natallia · <span data-i18n="foot">Гид в Палермо</span></span>
+    <span>Palermo, Sicilia · +39 327 532 7316</span>
+  </div>
+</footer>
+
+<div class="mcta" id="mcta">
+  <a class="btn red" data-wa="book" href="#"><span data-i18n="cta_wa">Записаться в WhatsApp</span></a>
+  <a class="btn sq" href="https://t.me/Natallia_italy" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 3.6 2.9 10.7c-1.3.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.5-1.3zM9.6 14.3l-.4 3.6-1.3-4.3 9.7-6.1c.5-.3.9 0 .5.3z"/></svg></a>
+</div>
+
+<script>
+(function(){
+  const PHONE = "393275327316";
+  const T = {
+    ru:{
+      nav_tours:"Экскурсии",nav_route:"Маршрут",nav_about:"О себе",nav_gift:"Подарок",nav_contact:"Контакты",
+      cta_short:"Записаться",cta_wa:"Записаться в WhatsApp",cta_book:"Хочу на экскурсию",cta_route:"Смотреть маршрут",cta_more:"Узнать подробнее",cta_gift:"Подарить экскурсию",cta_ig:"Instagram Натальи",
+      hero_eyebrow:"Гид по Палермо · Сицилия",hero_l1:"Прогулки по",hero_l2:"Палермо",hero_l3:"с Натальей",
+      hero_lede:"Арабо-норманнский собор, барочные церкви, шумный рынок Капо и площади старого города. Небольшая группа, спокойный темп и живой рассказ о городе, который сложно не полюбить.",
+      f1b:"3 ч",f1s:"продолжительность",f2b:"4 км",f2s:"пешком по центру",f3b:"до 6",f3s:"человек в группе",
+      tours_eyebrow:"Экскурсии",tours_title:"Выберите свою прогулку",tours_lead:"Индивидуальные экскурсии для вас и ваших близких: без толпы, без спешки и без заученного текста.",
+      t1_tag:"Пешеходная · около 3 часов",t1_title:"Обзорная экскурсия по Палермо",
+      t1_desc:"Главные сокровища исторического центра за одно утро: от Театра Массимо и рынка Капо до Кафедрального собора, площади Претория и барочных интерьеров, от которых захватывает дух.",
+      c1:"Театр Массимо",c2:"Рынок Капо",c3:"Кафедральный собор",c4:"Площадь Претория",c5:"Четыре угла",c6:"Марторана",c7:"+ 2 барочные жемчужины",
+      t1_price:"за группу до 6 человек",t1_note:"Если вас больше шести, цена обсуждается отдельно: для большой группы подключается аудиосистема с микрофоном.",
+      t2_tag:"С трансфером · до 4 человек",t2_title:"Палермо и окрестности",
+      t2_desc:"Расширенная программа для небольшой компании: Палермо и городки в его окрестностях, с трансфером. Отличный вариант, если хочется увидеть больше, чем исторический центр.",
+      t2_price_b:"По запросу",t2_price:"маршрут и стоимость в переписке",
+      route_eyebrow:"Маршрут",route_title:"Семь остановок старого Палермо",route_lead:"Около четырёх километров неспешным шагом: улицы, рынок, площади и церкви, в которые стоит заглянуть.",
+      w1b:"Начало в 10:00 или 10:30",w1s:"Продолжительность около 3 часов",w2b:"Удобная обувь",w2s:"И вода: её можно купить по дороге",w3b:"Плечи и колени закрыты",w3s:"Желательно для посещения церквей",
+      k_out:"Внешний осмотр",k_visit:"Посещение",
+      s1:"Театр Массимо",s1d:"Крупнейший оперный театр Италии и одна из визитных карточек Палермо.",
+      s2:"Исторический рынок Капо",s2d:"Прилавки, ароматы и голоса старого города: место, где Палермо живёт каждый день.",
+      s3:"Кафедральный собор",s3d:"Главный храм города, в облике которого соединились арабо-норманнские, готические и классические черты.",
+      s4:"Площадь Претория и Четыре угла",s4d:"Фонтан Претория с его скульптурами и барочный перекрёсток Куаттро Канти в самом сердце старого города.",
+      s5:"Церковь Марторана",s5d:"Знаменитые византийские мозаики XII века.",s5c1:"Билет 3 €",s5c2:"Вход до 13:00",s5c3:"В воскресенье закрыта",
+      s6:"Церковь св. Екатерины Александрийской",s6d:"Яркий пример искусства эпохи барокко, XVI век.",s6c1:"Билет 2 €",
+      s7:"Ораторий Сан-Лоренцо",s7d:"Барокко, переходящее в рококо, и скульптуры XVII века.",
+      quote:"Три часа, и Палермо становится вашим городом",
+      about_eyebrow:"О себе",about_name:"Наталья",about_role:"Гид по Палермо и окрестностям",
+      about_p1:"Здравствуйте! Меня зовут Наталья, и я провожу экскурсии по Палермо и его окрестностям. Я покажу вам город не по путеводителю: с его рынками, барокко, арабо-норманнскими соборами и историями, которые прячутся в переулках.",
+      about_p2:"Я работаю с небольшими группами, поэтому на прогулке есть время на вопросы, фотографии и чашку кофе по дороге. Напишите мне, и мы вместе подберём удобный день.",
+      v1b:"Небольшие группы",v1s:"До шести человек, только вы и ваши близкие",v2b:"Спокойный темп",v2s:"Без спешки, с остановками для фото",v3b:"На связи",v3s:"WhatsApp, Telegram и Instagram",
+      gift_eyebrow:"Подарок",gift_title:"Подарите прогулку по Палермо",gift_lead:"Экскурсия в подарок для мамы, подруги, любимого человека или друзей, которые собираются на Сицилию. Подарок, который запомнится надолго.",
+      g1b:"Напишите мне",g1s:"В WhatsApp или Telegram, кому хотите сделать подарок",g2b:"Обсудим детали",g2s:"Формат экскурсии и примерные даты поездки",g3b:"Дарите",g3s:"Красивый сертификат для вашего близкого человека",
+      cert_s:"Подарочный сертификат",cert_t:"Прогулка по Палермо",cert_for:"Для",
+      contact_eyebrow:"Контакты",contact_lead:"До встречи в Палермо. Напишите в удобный мессенджер: расскажите, сколько вас и когда вы планируете приехать.",
+      foot:"Гид в Палермо",
+      wa_book:"Здравствуйте, Наталья! Хочу записаться на обзорную экскурсию по Палермо.",
+      wa_around:"Здравствуйте, Наталья! Интересует экскурсия по Палермо и окрестностям с трансфером.",
+      wa_gift:"Здравствуйте, Наталья! Хочу подарить экскурсию по Палермо.",
+      title:"Natallia · Палермо"
+    },
+    en:{
+      nav_tours:"Tours",nav_route:"Route",nav_about:"About",nav_gift:"Gift",nav_contact:"Contact",
+      cta_short:"Book",cta_wa:"Book on WhatsApp",cta_book:"Book this tour",cta_route:"See the route",cta_more:"Ask for details",cta_gift:"Give a tour",cta_ig:"Natallia on Instagram",
+      hero_eyebrow:"Palermo guide · Sicily",hero_l1:"Walks through",hero_l2:"Palermo",hero_l3:"with Natallia",
+      hero_lede:"An Arab‑Norman cathedral, baroque churches, the lively Capo market and the squares of the old town. A small group, an easy pace and real stories about a city that is hard not to love.",
+      f1b:"3 h",f1s:"duration",f2b:"4 km",f2s:"on foot in the centre",f3b:"up to 6",f3s:"people per group",
+      tours_eyebrow:"Tours",tours_title:"Choose your walk",tours_lead:"Private tours for you and the people you travel with: no crowds, no rush and no memorised script.",
+      t1_tag:"Walking · about 3 hours",t1_title:"Palermo highlights tour",
+      t1_desc:"The treasures of the historic centre in one morning: from Teatro Massimo and the Capo market to the Cathedral, Piazza Pretoria and baroque interiors that take your breath away.",
+      c1:"Teatro Massimo",c2:"Capo market",c3:"Cathedral",c4:"Piazza Pretoria",c5:"Quattro Canti",c6:"La Martorana",c7:"+ 2 baroque gems",
+      t1_price:"per group of up to 6",t1_note:"More than six people? The price is agreed separately, as larger groups need an audio system with a microphone.",
+      t2_tag:"With transfer · up to 4 people",t2_title:"Palermo and surroundings",
+      t2_desc:"An extended programme for a small group: Palermo and the towns around it, with a transfer. A great choice if you want to see more than the historic centre.",
+      t2_price_b:"On request",t2_price:"route and price by message",
+      route_eyebrow:"Route",route_title:"Seven stops in old Palermo",route_lead:"About four kilometres at an easy pace: streets, a market, squares and churches worth stepping into.",
+      w1b:"Starts at 10:00 or 10:30",w1s:"Lasts about 3 hours",w2b:"Comfortable shoes",w2s:"And water, which you can buy on the way",w3b:"Shoulders and knees covered",w3s:"Recommended for visiting churches",
+      k_out:"Seen from outside",k_visit:"Visit",
+      s1:"Teatro Massimo",s1d:"The largest opera house in Italy and one of the symbols of Palermo.",
+      s2:"Historic Capo market",s2d:"Stalls, scents and voices of the old town: the place where Palermo lives every day.",
+      s3:"Palermo Cathedral",s3d:"The city's main church, where Arab‑Norman, Gothic and classical features meet.",
+      s4:"Piazza Pretoria and Quattro Canti",s4d:"The Pretoria Fountain with its sculptures and the baroque Quattro Canti crossroads at the heart of the old town.",
+      s5:"La Martorana church",s5d:"Famous 12th‑century Byzantine mosaics.",s5c1:"Ticket €3",s5c2:"Entry until 13:00",s5c3:"Closed on Sundays",
+      s6:"Church of St Catherine of Alexandria",s6d:"A vivid example of baroque art, 16th century.",s6c1:"Ticket €2",
+      s7:"Oratory of San Lorenzo",s7d:"Baroque turning into rococo, with 17th‑century sculptures.",
+      quote:"Three hours, and Palermo becomes your city",
+      about_eyebrow:"About",about_name:"Natallia",about_role:"Guide in Palermo and around",
+      about_p1:"Hello! My name is Natallia and I guide tours in Palermo and its surroundings. I will show you the city beyond the guidebook: its markets, its baroque, its Arab‑Norman cathedrals and the stories hidden in its side streets.",
+      about_p2:"I work with small groups, so there is always time for questions, photos and a coffee on the way. Write to me and we will find a day that suits you.",
+      v1b:"Small groups",v1s:"Up to six people, just you and your company",v2b:"Easy pace",v2s:"No rush, with stops for photos",v3b:"Easy to reach",v3s:"WhatsApp, Telegram and Instagram",
+      gift_eyebrow:"Gift",gift_title:"Give a walk through Palermo",gift_lead:"A tour as a gift for your mum, a friend, your partner or anyone heading to Sicily. A present they will remember for a long time.",
+      g1b:"Write to me",g1s:"On WhatsApp or Telegram, and tell me who the gift is for",g2b:"We agree the details",g2s:"The tour format and rough travel dates",g3b:"Give it",g3s:"A beautiful certificate for someone you love",
+      cert_s:"Gift certificate",cert_t:"A walk through Palermo",cert_for:"For",
+      contact_eyebrow:"Contact",contact_lead:"See you in Palermo. Message me in any app and tell me how many of you there are and when you plan to come.",
+      foot:"Guide in Palermo",
+      wa_book:"Hello Natallia! I would like to book the Palermo highlights tour.",
+      wa_around:"Hello Natallia! I am interested in the Palermo and surroundings tour with transfer.",
+      wa_gift:"Hello Natallia! I would like to give a Palermo tour as a gift.",
+      title:"Natallia · Palermo guide"
+    }
+  };
+
+  const big = document.getElementById("bigword");
+  function splitBig(){
+    const txt = big.textContent;
+    big.textContent = "";
+    [...txt].forEach((c,i)=>{const s=document.createElement("span");s.className="ch";s.textContent=c;s.style.animationDelay=(0.2+i*0.06)+"s";big.appendChild(s);});
+    big.setAttribute("aria-label",txt);
+  }
+
+  let lang = "ru";
+  function setLang(l, first){
+    lang = T[l] ? l : "ru";
+    const d = T[lang];
+    document.documentElement.lang = lang;
+    document.title = d.title;
+    document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n; if(d[k]!=null) el.textContent=d[k];});
+    document.querySelectorAll("[data-wa]").forEach(a=>{
+      a.href = "https://wa.me/"+PHONE+"?text="+encodeURIComponent(d["wa_"+a.dataset.wa]);
+    });
+    document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.lang===lang));
+    splitBig();
+    if(!first){ try{localStorage.setItem("lang",lang)}catch(e){} }
+  }
+  let saved=null; try{saved=localStorage.getItem("lang")}catch(e){}
+  setLang(saved || ((navigator.language||"ru").toLowerCase().match(/^(ru|be|uk|kk)/) ? "ru" : "en"), true);
+  document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.lang)));
+
+  // duplicate marquee for seamless loop
+  const track=document.getElementById("track"); track.innerHTML += track.innerHTML;
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // reveal on scroll (only for elements below the first screen)
+  if("IntersectionObserver" in window && !reduce){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove("rv-pending");io.unobserve(e.target);}}),{threshold:.12,rootMargin:"0px 0px -6% 0px"});
+    document.querySelectorAll(".rv").forEach(el=>{
+      if(el.getBoundingClientRect().top > innerHeight*0.92){el.classList.add("rv-pending");io.observe(el);}
+    });
+  }
+
+  const nav=document.getElementById("nav"), mcta=document.getElementById("mcta");
+  const heroImg=document.getElementById("heroImg"), par=document.getElementById("parImg");
+  const stops=document.getElementById("stops"), prog=document.getElementById("progress");
+  const stopEls=[...stops.querySelectorAll(".stop")];
+  let ticking=false;
+  function onScroll(){
+    const y=scrollY, h=innerHeight;
+    nav.classList.toggle("scrolled", y>20);
+    mcta.classList.toggle("show", y>h*0.8);
+    if(!reduce){
+      if(y<h*1.3) heroImg.style.translate = "0 "+(y*0.08)+"px";
+      const r=par.parentElement.getBoundingClientRect();
+      if(r.bottom>0 && r.top<h){ const t=(r.top+r.height/2-h/2)/h; par.style.transform="translateY("+(t*-60)+"px)"; }
+    }
+    const sr=stops.getBoundingClientRect();
+    const p=Math.min(1,Math.max(0,(h*0.6 - sr.top)/sr.height));
+    prog.style.setProperty("--p", reduce?1:p);
+    stopEls.forEach(s=>{const b=s.getBoundingClientRect(); s.classList.toggle("on", b.top < h*0.62);});
+    ticking=false;
+  }
+  addEventListener("scroll",()=>{if(!ticking){ticking=true;requestAnimationFrame(onScroll);}},{passive:true});
+  addEventListener("resize",onScroll);
+  onScroll();
+
+  // certificate tilt
+  const cert=document.getElementById("cert");
+  if(!reduce && matchMedia("(hover:hover)").matches){
+    cert.parentElement.addEventListener("pointermove",e=>{
+      const r=cert.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      cert.style.transform=`rotate(-2deg) rotateY(${x*16}deg) rotateX(${-y*12}deg) scale(1.03)`;
+    });
+    cert.parentElement.addEventListener("pointerleave",()=>{cert.style.transform="";});
+  }
+})();
+</script>
+</body>
+</html>
