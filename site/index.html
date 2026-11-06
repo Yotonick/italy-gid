@@ -91,6 +91,11 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.05;text-wrap
 .lang button[aria-pressed="true"]{background:var(--ink);color:var(--stone)}
 .nav .btn{padding:11px 18px;font-size:14px}
 
+/* MOBILE DRAWER */
+.burger,.drawer-x{display:none}
+.drawer,.overlay{display:none}
+body.menu-open{overflow:hidden}
+
 /* HERO */
 .hero{position:relative;padding:118px 0 70px;overflow:hidden}
 .hero-bg{position:absolute;left:0;right:0;top:50%;transform:translateY(-38%);font-family:var(--f-label);font-size:clamp(150px,27vw,420px);line-height:.8;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(179,25,31,.16);pointer-events:none;user-select:none;z-index:0}
@@ -303,6 +308,31 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .route-side{position:static}
 }
 @media (max-width:980px){
+  .burger{display:block;width:44px;height:44px;border-radius:50%;border:1px solid var(--ink);background:none;cursor:pointer;position:relative;flex:none;color:var(--ink)}
+  .burger span{position:absolute;left:12px;right:12px;height:1.5px;background:currentColor;transition:transform .4s var(--ease),opacity .25s}
+  .burger span:nth-child(1){top:15px}.burger span:nth-child(2){top:21px}.burger span:nth-child(3){top:27px}
+  .overlay{display:block;position:fixed;inset:0;z-index:70;background:rgba(30,24,20,.55);opacity:0;pointer-events:none;transition:opacity .4s}
+  .drawer{display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;z-index:80;width:min(86vw,360px);background:var(--stone);padding:86px 28px 28px;overflow-y:auto;box-shadow:-30px 0 60px -30px rgba(30,24,20,.55);transform:translateX(104%);visibility:hidden;transition:transform .5s var(--ease),visibility 0s .5s}
+  .drawer-x{display:grid;place-items:center;position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;border:1px solid var(--ink);background:none;color:var(--ink);cursor:pointer}
+  .drawer-x svg{width:20px;height:20px}
+  .drawer ul{list-style:none}
+  .drawer li{opacity:0;transform:translateX(18px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+  .drawer li a{display:block;padding:15px 0;border-bottom:1px solid var(--line);text-decoration:none;font-family:var(--f-display);font-size:28px;line-height:1.1}
+  .drawer li a:active{color:var(--red)}
+  .drawer-cta{margin-top:auto;padding-top:28px;display:grid;gap:10px}
+  .drawer-cta .btn{justify-content:center}
+  body.menu-open .overlay{opacity:1;pointer-events:auto}
+  body.menu-open .drawer{transform:none;visibility:visible;transition:transform .5s var(--ease),visibility 0s}
+  body.menu-open .drawer li{opacity:1;transform:none}
+  body.menu-open .drawer li:nth-child(1){transition-delay:.12s}
+  body.menu-open .drawer li:nth-child(2){transition-delay:.17s}
+  body.menu-open .drawer li:nth-child(3){transition-delay:.22s}
+  body.menu-open .drawer li:nth-child(4){transition-delay:.27s}
+  body.menu-open .drawer li:nth-child(5){transition-delay:.32s}
+  body.menu-open .drawer li:nth-child(6){transition-delay:.37s}
+  body.menu-open .burger span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  body.menu-open .burger span:nth-child(2){opacity:0}
+  body.menu-open .burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
   .nav-links{display:none}
   .hero{padding-top:100px}
   .hero .wrap{grid-template-columns:1fr;grid-template-areas:"head" "photo" "cta"}
@@ -364,9 +394,27 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <button type="button" data-lang="en" aria-pressed="false">EN</button>
       </div>
       <a class="btn red nav-wa" data-wa="book" href="#"><span data-i18n="cta_short">Записаться</span></a>
+      <button class="burger" id="burger" type="button" data-i18n-aria="menu" aria-label="Меню" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
+
+<div class="overlay" id="overlay"></div>
+<nav class="drawer" id="drawer" data-i18n-aria="menu" aria-label="Меню" aria-hidden="true">
+  <button class="drawer-x" id="drawerX" type="button" data-i18n-aria="menu_close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <ul>
+    <li><a href="#tours" data-i18n="nav_tours">Экскурсии</a></li>
+    <li><a href="#route" data-i18n="nav_route">Маршрут</a></li>
+    <li><a href="#about" data-i18n="nav_about">О себе</a></li>
+    <li><a href="#reviews" data-i18n="nav_reviews">Отзывы</a></li>
+    <li><a href="#gift" data-i18n="nav_gift">Подарок</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Контакты</a></li>
+  </ul>
+  <div class="drawer-cta">
+    <a class="btn red" data-wa="book" href="#"><span data-i18n="cta_wa">Записаться в WhatsApp</span></a>
+    <a class="btn ghost" href="https://t.me/Natallia_italy"><span>Telegram</span></a>
+  </div>
+</nav>
 
 <main id="top">
 
@@ -665,7 +713,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   const PHONE = "393275327316";
   const T = {
     ru:{
-      nav_tours:"Экскурсии",nav_route:"Маршрут",nav_about:"О себе",nav_gift:"Подарок",nav_reviews:"Отзывы",nav_contact:"Контакты",
+      nav_tours:"Экскурсии",nav_route:"Маршрут",nav_about:"О себе",nav_gift:"Подарок",nav_reviews:"Отзывы",menu:"Меню",menu_close:"Закрыть",nav_contact:"Контакты",
       cta_short:"Записаться",cta_wa:"Записаться в WhatsApp",cta_book:"Хочу на экскурсию",cta_price:"Узнать стоимость",cta_route:"Смотреть маршрут",cta_more:"Узнать подробнее",cta_gift:"Подарить экскурсию",cta_ig:"Instagram Натальи",
       hero_eyebrow:"Гид по Палермо · Сицилия",hero_l1:"Прогулки по",hero_l2:"Палермо",hero_l3:"с Натальей",
       hero_lede:"Арабо-норманнский собор, барочные церкви, шумный рынок Капо и площади старого города. Индивидуально или большой компанией, в спокойном темпе и с живым рассказом о городе, который сложно не полюбить.",
@@ -697,7 +745,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       rev_empty_t:"Здесь появятся отзывы гостей",rev_empty_s:"Станьте первым, кто расскажет о прогулке по Палермо.",
       rev_form_t:"Оставить отзыв",rev_name:"Ваше имя",rev_rating:"Оценка",rev_text:"Ваш отзыв",rev_text_ph:"Что запомнилось больше всего?",rev_send:"Отправить отзыв",rev_sending:"Отправляю…",
       rev_note:"Отзыв появится на сайте после того, как Наталья его прочитает.",rev_thanks:"Спасибо! Отзыв отправлен Наталье на проверку.",rev_thanks_demo:" Демо-режим: пока отзыв виден только вам.",
-      rev_err_fill:"Укажите имя и напишите хотя бы пару предложений.",rev_err_send:"Не получилось отправить. Попробуйте ещё раз чуть позже.",rev_own:"Виден только вам (демо)",
+      rev_err_fill:"Укажите имя и напишите хотя бы пару предложений.",rev_err_rating:"Поставьте оценку звёздами.",rev_err_wait:"Вы только что отправили отзыв. Подождите минуту и попробуйте снова.",rev_err_send:"Не получилось отправить. Попробуйте ещё раз чуть позже.",rev_own:"Виден только вам (демо)",
       gift_eyebrow:"Подарок",gift_title:"Подарите прогулку по Палермо",gift_lead:"Экскурсия в подарок для мамы, подруги, любимого человека или друзей, которые собираются на Сицилию. Подарок, который запомнится надолго.",
       g1b:"Напишите мне",g1s:"В WhatsApp или Telegram, кому хотите сделать подарок",g2b:"Обсудим детали",g2s:"Формат экскурсии и примерные даты поездки",g3b:"Дарите",g3s:"Красивый сертификат для вашего близкого человека",
       cert_s:"Подарочный сертификат",cert_t:"Прогулка по Палермо",cert_for:"Для",
@@ -709,7 +757,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       title:"Natallia · Палермо"
     },
     en:{
-      nav_tours:"Tours",nav_route:"Route",nav_about:"About",nav_gift:"Gift",nav_reviews:"Reviews",nav_contact:"Contact",
+      nav_tours:"Tours",nav_route:"Route",nav_about:"About",nav_gift:"Gift",nav_reviews:"Reviews",menu:"Menu",menu_close:"Close",nav_contact:"Contact",
       cta_short:"Book",cta_wa:"Book on WhatsApp",cta_book:"Book this tour",cta_price:"Ask the price",cta_route:"See the route",cta_more:"Ask for details",cta_gift:"Give a tour",cta_ig:"Natallia on Instagram",
       hero_eyebrow:"Palermo guide · Sicily",hero_l1:"Walks through",hero_l2:"Palermo",hero_l3:"with Natallia",
       hero_lede:"An Arab‑Norman cathedral, baroque churches, the lively Capo market and the squares of the old town. Private walks or large groups, an easy pace and real stories about a city that is hard not to love.",
@@ -741,7 +789,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       rev_empty_t:"Guest reviews will appear here",rev_empty_s:"Be the first to tell others about your walk through Palermo.",
       rev_form_t:"Leave a review",rev_name:"Your name",rev_rating:"Rating",rev_text:"Your review",rev_text_ph:"What stayed with you the most?",rev_send:"Send review",rev_sending:"Sending…",
       rev_note:"Your review will appear on the site once Natallia has read it.",rev_thanks:"Thank you! Your review has been sent to Natallia for approval.",rev_thanks_demo:" Demo mode: for now only you can see it.",
-      rev_err_fill:"Please add your name and a few sentences.",rev_err_send:"Could not send it. Please try again a little later.",rev_own:"Only visible to you (demo)",
+      rev_err_fill:"Please add your name and a few sentences.",rev_err_rating:"Please rate your walk with the stars.",rev_err_wait:"You have just sent a review. Please wait a minute and try again.",rev_err_send:"Could not send it. Please try again a little later.",rev_own:"Only visible to you (demo)",
       gift_eyebrow:"Gift",gift_title:"Give a walk through Palermo",gift_lead:"A tour as a gift for your mum, a friend, your partner or anyone heading to Sicily. A present they will remember for a long time.",
       g1b:"Write to me",g1s:"On WhatsApp or Telegram, and tell me who the gift is for",g2b:"We agree the details",g2s:"The tour format and rough travel dates",g3b:"Give it",g3s:"A beautiful certificate for someone you love",
       cert_s:"Gift certificate",cert_t:"A walk through Palermo",cert_for:"For",
@@ -771,6 +819,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     document.title = d.title;
     document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n; if(d[k]!=null) el.textContent=d[k];});
     document.querySelectorAll("[data-i18n-ph]").forEach(el=>{const k=el.dataset.i18nPh; if(d[k]!=null) el.placeholder=d[k];});
+    document.querySelectorAll("[data-i18n-aria]").forEach(el=>{const k=el.dataset.i18nAria; if(d[k]!=null) el.setAttribute("aria-label",d[k]);});
     document.querySelectorAll("[data-wa]").forEach(a=>{
       a.href = "https://wa.me/"+PHONE+"?text="+encodeURIComponent(d["wa_"+a.dataset.wa]);
     });
@@ -838,12 +887,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     const name=f.name.value.trim(), text=f.text.value.trim();
     if(f.website.value){ say(d.rev_thanks,"ok"); revForm.reset(); return; } // honeypot
     if(!name || text.length<10){ say(d.rev_err_fill,"err"); return; }
+    if(!rating){ say(d.rev_err_rating,"err"); return; }
     revSend.disabled=true; say(d.rev_sending,"");
     const review={name,text,rating,date:new Date().toISOString()};
     try{
       if(REVIEWS_API){
         const r=await fetch(REVIEWS_API.replace(/\/$/,"")+"/submit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,text,rating,website:""})});
-        if(!r.ok) throw new Error("http "+r.status);
+        if(!r.ok) throw new Error(r.status===429 ? "wait" : "http "+r.status);
         say(d.rev_thanks,"ok");
       } else {
         const own=readOwn(); own.unshift(review);
@@ -852,9 +902,25 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         say(d.rev_thanks+d.rev_thanks_demo,"ok");
       }
       revForm.reset(); rating=0; starBtns.forEach(x=>{x.classList.remove("on");x.setAttribute("aria-pressed","false");});
-    }catch(err){ say(d.rev_err_send,"err"); }
+    }catch(err){ say(err.message==="wait" ? d.rev_err_wait : d.rev_err_send,"err"); }
     revSend.disabled=false;
   });
+
+  // ---------- MOBILE DRAWER ----------
+  const burger=document.getElementById("burger"), drawer=document.getElementById("drawer");
+  const overlay=document.getElementById("overlay"), drawerX=document.getElementById("drawerX");
+  function setMenu(open){
+    document.body.classList.toggle("menu-open",open);
+    burger.setAttribute("aria-expanded",open);
+    drawer.setAttribute("aria-hidden",!open);
+    if(open) drawerX.focus({preventScroll:true}); else if(document.activeElement && drawer.contains(document.activeElement)) burger.focus({preventScroll:true});
+  }
+  burger.addEventListener("click",()=>setMenu(!document.body.classList.contains("menu-open")));
+  drawerX.addEventListener("click",()=>setMenu(false));
+  overlay.addEventListener("click",()=>setMenu(false));
+  drawer.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>setMenu(false)));
+  addEventListener("keydown",e=>{ if(e.key==="Escape" && document.body.classList.contains("menu-open")) setMenu(false); });
+  addEventListener("resize",()=>{ if(innerWidth>980 && document.body.classList.contains("menu-open")) setMenu(false); });
 
   // duplicate marquee for seamless loop
   const track=document.getElementById("track"); track.innerHTML += track.innerHTML;
