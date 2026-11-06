@@ -115,7 +115,7 @@ body.menu-open{overflow:hidden}
 .facts{display:flex;flex-wrap:wrap;gap:0;margin-top:40px;border-top:1px solid var(--line)}
 .fact{padding:18px 28px 0 0;margin-right:28px;border-right:1px solid var(--line)}
 .fact:last-child{border-right:0;margin-right:0}
-.fact b{display:block;font-family:var(--f-display);font-weight:400;font-size:clamp(26px,2.6vw,36px);line-height:1}
+.fact b{white-space:nowrap;display:block;font-family:var(--f-display);font-weight:400;font-size:clamp(26px,2.6vw,36px);line-height:1}
 .fact small{font-size:13px;color:var(--muted);letter-spacing:.02em}
 
 .hero-photo{position:relative;width:100%;max-width:470px;justify-self:end}
@@ -320,7 +320,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .drawer li a{display:block;padding:15px 0;border-bottom:1px solid var(--line);text-decoration:none;font-family:var(--f-display);font-size:28px;line-height:1.1}
   .drawer li a:active{color:var(--red)}
   .drawer-cta{margin-top:auto;padding-top:28px;display:grid;gap:10px}
-  .drawer-cta .btn{justify-content:center}
+  .drawer-cta .btn{justify-content:center;padding-left:14px;padding-right:14px}
   body.menu-open .overlay{opacity:1;pointer-events:auto}
   body.menu-open .drawer{transform:none;visibility:visible;transition:transform .5s var(--ease),visibility 0s}
   body.menu-open .drawer li{opacity:1;transform:none}
@@ -355,7 +355,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .nav .btn.nav-wa{display:none}
   .logo b{font-size:22px}
   .hero{padding:90px 0 50px}
-  .hero-cta .btns .btn{flex:1;justify-content:center}
+  .hero-cta .btns .btn{flex:1 1 100%;justify-content:center}
+  .btns .btn{padding-left:20px;padding-right:20px}
+  .mcta .btn{padding-left:14px;padding-right:14px;font-size:14.5px}
+  .fact small{white-space:nowrap}
   .stop{grid-template-columns:1fr}
   .thumbs{order:-1}
   .thumb{width:72px}
@@ -368,6 +371,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   footer{padding-bottom:90px}
   .tour{padding:14px;border-radius:22px}
   .tour > div:last-child{padding:4px 8px 12px}
+}
+@media (max-width:360px){
+  .mcta .btn{padding-left:10px;padding-right:10px;font-size:13.5px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
@@ -448,7 +454,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="facts">
         <div class="fact"><b data-i18n="f1b">3 ч</b><small data-i18n="f1s">продолжительность</small></div>
         <div class="fact"><b data-i18n="f2b">4 км</b><small data-i18n="f2s">пешком по центру</small></div>
-        <div class="fact"><b data-i18n="f3b">RU · EN</b><small data-i18n="f3s">на русском или английском</small></div>
+        <div class="fact"><b data-i18n="f3b">RU · EN</b><small data-i18n="f3s">языки экскурсий</small></div>
       </div>
     </div>
   </div>
@@ -717,7 +723,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       cta_short:"Записаться",cta_wa:"Записаться в WhatsApp",cta_book:"Хочу на экскурсию",cta_price:"Узнать стоимость",cta_route:"Смотреть маршрут",cta_more:"Узнать подробнее",cta_gift:"Подарить экскурсию",cta_ig:"Instagram Натальи",
       hero_eyebrow:"Гид по Палермо · Сицилия",hero_l1:"Прогулки по",hero_l2:"Палермо",hero_l3:"с Натальей",
       hero_lede:"Арабо-норманнский собор, барочные церкви, шумный рынок Капо и площади старого города. Индивидуально или большой компанией, в спокойном темпе и с живым рассказом о городе, который сложно не полюбить.",
-      f1b:"3 ч",f1s:"продолжительность",f2b:"4 км",f2s:"пешком по центру",f3b:"RU · EN",f3s:"на русском или английском",
+      f1b:"3 ч",f1s:"продолжительность",f2b:"4 км",f2s:"пешком по центру",f3b:"RU · EN",f3s:"языки экскурсий",
       tours_eyebrow:"Экскурсии",tours_title:"Выберите свою прогулку",tours_lead:"Индивидуальные экскурсии и экскурсии для больших групп: без спешки и без заученного текста. Провожу их на русском или английском, в зависимости от аудитории.",
       t1_tag:"Пешеходная · около 3 часов",t1_title:"Обзорная экскурсия по Палермо",
       t1_desc:"Главные сокровища исторического центра за одно утро: от Театра Массимо и рынка Капо до Кафедрального собора, площади Претория и барочных интерьеров, от которых захватывает дух.",
@@ -761,7 +767,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       cta_short:"Book",cta_wa:"Book on WhatsApp",cta_book:"Book this tour",cta_price:"Ask the price",cta_route:"See the route",cta_more:"Ask for details",cta_gift:"Give a tour",cta_ig:"Natallia on Instagram",
       hero_eyebrow:"Palermo guide · Sicily",hero_l1:"Walks through",hero_l2:"Palermo",hero_l3:"with Natallia",
       hero_lede:"An Arab‑Norman cathedral, baroque churches, the lively Capo market and the squares of the old town. Private walks or large groups, an easy pace and real stories about a city that is hard not to love.",
-      f1b:"3 h",f1s:"duration",f2b:"4 km",f2s:"on foot in the centre",f3b:"RU · EN",f3s:"in Russian or English",
+      f1b:"3 h",f1s:"duration",f2b:"4 km",f2s:"on foot in the centre",f3b:"RU · EN",f3s:"tour languages",
       tours_eyebrow:"Tours",tours_title:"Choose your walk",tours_lead:"Private tours and tours for large groups: no rush and no memorised script. Led in Russian or English, depending on your audience.",
       t1_tag:"Walking · about 3 hours",t1_title:"Palermo highlights tour",
       t1_desc:"The treasures of the historic centre in one morning: from Teatro Massimo and the Capo market to the Cathedral, Piazza Pretoria and baroque interiors that take your breath away.",
