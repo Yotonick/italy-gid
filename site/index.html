@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <title>Natallia · Палермо</title>
-<meta name="description" content="Обзорная экскурсия по Палермо с гидом Натальей: собор, рынок Капо, площадь Претория, Марторана, барокко. Индивидуально и для больших групп, на русском или английском.">
-<meta property="og:title" content="Прогулки по Палермо с Натальей">
-<meta property="og:description" content="Авторская обзорная экскурсия по историческому центру Палермо: индивидуально и для групп.">
+<meta name="description" content="Гид в Палермо Наталья: обзорная экскурсия по Палермо, поездки в Монреале, Чефалу и Каккамо, фотосессии, трансфер и маршруты по Сицилии. Индивидуально и для больших групп, на русском или английском.">
+<meta property="og:title" content="Гид в Палермо и по Сицилии · Наталья">
+<meta property="og:description" content="Экскурсии по Палермо, Монреале, Чефалу и Каккамо: индивидуально и для групп, на русском или английском.">
 <meta property="og:image" content="img/hero.jpg">
 <meta name="theme-color" content="#EEE3D1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -135,7 +135,7 @@ body.menu-open{overflow:hidden}
 
 /* MARQUEE */
 .marquee{overflow:hidden;padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.track{display:flex;gap:18px;width:max-content;animation:scroll 55s linear infinite}
+.track{display:flex;gap:18px;width:max-content;animation:scroll 85s linear infinite}
 .marquee:hover .track{animation-play-state:paused}
 .track figure{height:clamp(170px,22vw,260px);flex:none;border-radius:14px;overflow:hidden}
 .track figure:nth-child(3n+1){border-radius:999px 999px 14px 14px}
@@ -189,7 +189,9 @@ body.menu-open{overflow:hidden}
 .stop .chips{margin-top:12px}
 .stop .chips li{background:transparent;font-size:13px;padding:5px 12px}
 .thumbs{display:flex;gap:8px}
-.thumb{width:clamp(78px,9vw,112px);aspect-ratio:3/4;border-radius:999px 999px 10px 10px;overflow:hidden}
+.thumb{width:clamp(78px,9vw,112px);aspect-ratio:3/4;border-radius:999px 999px 10px 10px;overflow:hidden;position:relative;padding:0;border:0;background:var(--stone);cursor:zoom-in;display:block}
+.thumb[data-more]::after{content:attr(data-more);position:absolute;inset:0;display:grid;place-items:center;background:rgba(30,24,20,.45);color:var(--stone);font-family:var(--f-display);font-size:22px;transition:background .3s}
+.thumb[data-more]:hover::after{background:rgba(179,25,31,.55)}
 .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
 .stop:hover .thumb img{transform:scale(1.08)}
 .thumb.tile{border:1px solid var(--line);background-size:26px 26px;opacity:.8}
@@ -303,6 +305,86 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .rv-pending{opacity:0;transform:translateY(34px)}
 .rv{transition:opacity 1s var(--ease),transform 1s var(--ease)}
 
+/* LINK TO NEARBY */
+.near-link{margin-top:22px;display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;padding:20px clamp(20px,3vw,34px);border:1px dashed rgba(30,24,20,.28);border-radius:22px;text-decoration:none;transition:border-color .4s,background .4s}
+.near-link span{color:var(--muted);font-size:15px}
+.near-link b{font-family:var(--f-display);font-weight:400;font-size:clamp(20px,2.2vw,26px)}
+.near-link svg{width:22px;height:22px;margin-left:auto;color:var(--red);transition:transform .4s var(--ease)}
+.near-link:hover{border-color:var(--red);background:#F5ECDD}
+.near-link:hover svg{transform:translateX(6px)}
+
+/* NEARBY TOURS */
+.near{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,5vw,70px);align-items:start;padding:clamp(22px,3vw,34px);background:#F5ECDD;border:1px solid var(--line);border-radius:28px}
+.near + .near{margin-top:28px}
+.near.alt{grid-template-columns:1.15fr .85fr}
+.near.alt .near-gal{order:2}
+.near-gal{display:grid;gap:10px;position:sticky;top:100px}
+.near-main{display:block;padding:0;border:0;cursor:zoom-in;aspect-ratio:4/5;max-height:600px;background:var(--stone-2)}
+.near-main img{transition:transform 1.2s var(--ease)}
+.near:hover .near-main img{transform:scale(1.04)}
+.near-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.near-strip .thumb{width:100%;aspect-ratio:1;border-radius:14px}
+.near h3{font-size:clamp(34px,4.2vw,56px);margin:14px 0 8px}
+.near-sub{font-family:var(--f-display);font-size:clamp(19px,1.8vw,23px);line-height:1.3;color:var(--red);margin-bottom:18px;text-wrap:balance}
+.near-body > p,.near-text p{color:var(--muted);max-width:60ch}
+.near-text{display:grid;gap:14px;padding-top:14px}
+.near-more{margin-top:14px}
+.near-more summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:var(--ink);padding:6px 0;border-bottom:1px solid var(--red)}
+.near-more summary::-webkit-details-marker{display:none}
+.near-more summary svg{width:18px;height:18px;color:var(--red);transition:transform .35s var(--ease)}
+.near-more[open] summary svg{transform:rotate(180deg)}
+.near-more .sm-close,.near-more[open] .sm-open{display:none}
+.near-more[open] .sm-close{display:inline}
+.near-more[open] .near-text{animation:fadeUp .6s var(--ease) both}
+.near-facts{margin:26px 0 26px;padding-top:20px;border-top:1px solid var(--line)}
+.near-facts b{font-family:var(--f-label);text-transform:uppercase;letter-spacing:.18em;font-size:13px;font-weight:400;color:var(--teal)}
+.near-facts ul{list-style:none;display:grid;gap:8px;margin-top:12px}
+.near-facts li{position:relative;padding-left:22px;font-size:15.5px}
+.near-facts li::before{content:"";position:absolute;left:2px;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--gold)}
+
+/* SERVICES */
+.services{background:var(--stone-2)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.svc{display:flex;flex-direction:column;gap:14px;padding:clamp(22px,3vw,32px);background:#F5ECDD;border:1px solid var(--line);border-radius:24px;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.svc:hover{transform:translateY(-4px);box-shadow:0 30px 60px -36px rgba(30,24,20,.45)}
+.svc-ico{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--stone);color:var(--red);border:1px solid var(--line)}
+.svc-ico svg{width:26px;height:26px}
+.svc h3{font-size:clamp(25px,2.5vw,32px)}
+.svc p{color:var(--muted);font-size:15.5px}
+.svc-link{margin-top:auto;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;text-decoration:none;color:var(--red);align-self:flex-start;padding-top:6px}
+.svc-link svg{width:18px;height:18px;transition:transform .4s var(--ease)}
+.svc-link:hover svg{transform:rotate(45deg)}
+.svc.big{grid-column:span 3;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px 34px;background:var(--ink);color:var(--stone);border-color:transparent;padding:clamp(26px,4vw,44px)}
+.svc.big .svc-ico{width:76px;height:76px;background:var(--red);color:var(--stone);border:0;grid-row:span 2}
+.svc.big .svc-ico svg{width:34px;height:34px}
+.svc.big h3{font-size:clamp(30px,3.6vw,46px)}
+.svc.big p{color:rgba(238,227,209,.75);font-size:clamp(16px,1.4vw,18px);max-width:70ch;grid-column:2}
+.svc.big .svc-link{grid-column:3;grid-row:1 / span 2;align-self:center;margin:0;padding:15px 24px;border-radius:999px;background:var(--stone);color:var(--ink)}
+
+/* GIFT PICKER */
+.gift-pick-l{font-family:var(--f-label);text-transform:uppercase;letter-spacing:.18em;font-size:13px;color:var(--gold);margin-bottom:12px}
+.gift-pick{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.gift-pick button{font:inherit;font-size:15px;padding:9px 18px;border-radius:999px;border:1px solid rgba(238,227,209,.3);background:transparent;color:var(--stone);cursor:pointer;transition:background .3s,border-color .3s,color .3s}
+.gift-pick button:hover{border-color:var(--gold)}
+.gift-pick button[aria-checked="true"]{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.steps{margin-bottom:30px}
+
+/* LIGHTBOX */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(20,16,13,.94);display:grid;place-items:center;opacity:0;transition:opacity .35s var(--ease)}
+.lb[hidden]{display:none}
+.lb.open{opacity:1}
+.lb figure{max-width:min(92vw,1300px);max-height:86vh;display:grid;place-items:center}
+.lb img{max-width:100%;max-height:86vh;width:auto;height:auto;border-radius:12px;box-shadow:0 30px 80px -20px rgba(0,0,0,.7);user-select:none;-webkit-user-drag:none}
+.lb button{position:absolute;width:52px;height:52px;border-radius:50%;border:1px solid rgba(238,227,209,.35);background:rgba(30,24,20,.5);color:var(--stone);cursor:pointer;display:grid;place-items:center;transition:background .3s,border-color .3s}
+.lb button:hover{background:var(--red);border-color:var(--red)}
+.lb button svg{width:22px;height:22px}
+.lb .lb-x{top:16px;right:16px}
+.lb .lb-p{left:16px;top:50%;margin-top:-26px}
+.lb .lb-n{right:16px;top:50%;margin-top:-26px}
+.lb .lb-c{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:rgba(238,227,209,.75);font-family:var(--f-label);letter-spacing:.2em;font-size:14px}
+.lb.single .lb-p,.lb.single .lb-n,.lb.single .lb-c{display:none}
+@media (max-width:640px){.lb .lb-p,.lb .lb-n{top:auto;bottom:10px;margin:0}.lb .lb-c{bottom:26px}}
+
 /* RESPONSIVE */
 @media (max-height:860px) and (min-width:981px){
   .route-side{position:static}
@@ -330,6 +412,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   body.menu-open .drawer li:nth-child(4){transition-delay:.27s}
   body.menu-open .drawer li:nth-child(5){transition-delay:.32s}
   body.menu-open .drawer li:nth-child(6){transition-delay:.37s}
+  body.menu-open .drawer li:nth-child(7){transition-delay:.42s}
   body.menu-open .burger span:nth-child(1){transform:translateY(6px) rotate(45deg)}
   body.menu-open .burger span:nth-child(2){opacity:0}
   body.menu-open .burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
@@ -339,7 +422,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .hero-photo{justify-self:center;max-width:400px;margin-top:30px}
   .badge{left:-14px;bottom:30px;width:108px;height:108px}
   .badge text{font-size:11.5px;letter-spacing:2.6px}
-  .tour,.tour.alt{grid-template-columns:1fr}
+  .tour,.tour.alt,.near,.near.alt{grid-template-columns:1fr}
+  .near.alt .near-gal{order:0}
+  .near-gal{position:static}
+  .near-main{aspect-ratio:4/3.4;max-height:none}
+  .svc-grid{grid-template-columns:1fr 1fr}
+  .svc.big{grid-column:span 2;grid-template-columns:auto 1fr}
+  .svc.big .svc-ico{grid-row:auto}
+  .svc.big p{grid-column:1 / -1}
+  .svc.big .svc-link{grid-column:1 / -1;grid-row:auto;justify-self:start}
   .tour.alt .tour-img{order:0}
   .tour-img{aspect-ratio:4/3.4;border-radius:999px 999px 18px 18px}
   .route-grid,.about-grid,.gift-grid,.rev-grid{grid-template-columns:1fr}
@@ -372,6 +463,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   footer{padding-bottom:90px}
   .tour{padding:14px;border-radius:22px}
   .tour > div:last-child{padding:4px 8px 12px}
+  .near{padding:14px;border-radius:22px}
+  .near-body{padding:4px 8px 12px}
+  .near .btns .btn{flex:1 1 100%;justify-content:center}
+  .svc-grid{grid-template-columns:1fr}
+  .svc.big{grid-column:auto;display:flex;align-items:flex-start}
+  .svc.big .svc-ico{width:60px;height:60px}
+  .svc.big .svc-link{align-self:flex-start}
+  .near-link svg{margin-left:0}
 }
 @media (max-width:360px){
   .mcta .btn{padding-left:10px;padding-right:10px;font-size:13.5px}
@@ -395,7 +494,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <a class="logo" href="#top" aria-label="Natallia · Palermo"><b>Natallia</b><span>Palermo</span></a>
     <ul class="nav-links">
       <li><a href="#tours" data-i18n="nav_tours">Экскурсии</a></li>
-      <li><a href="#route" data-i18n="nav_route">Маршрут</a></li>
+      <li><a href="#around" data-i18n="nav_around">Окрестности</a></li>
+      <li><a href="#services" data-i18n="nav_services">Услуги</a></li>
       <li><a href="#about" data-i18n="nav_about">О себе</a></li>
       <li><a href="#reviews" data-i18n="nav_reviews">Отзывы</a></li>
       <li><a href="#gift" data-i18n="nav_gift">Подарок</a></li>
@@ -417,7 +517,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <button class="drawer-x" id="drawerX" type="button" data-i18n-aria="menu_close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
   <ul>
     <li><a href="#tours" data-i18n="nav_tours">Экскурсии</a></li>
-    <li><a href="#route" data-i18n="nav_route">Маршрут</a></li>
+    <li><a href="#around" data-i18n="nav_around">Окрестности</a></li>
+    <li><a href="#services" data-i18n="nav_services">Услуги</a></li>
     <li><a href="#about" data-i18n="nav_about">О себе</a></li>
     <li><a href="#reviews" data-i18n="nav_reviews">Отзывы</a></li>
     <li><a href="#gift" data-i18n="nav_gift">Подарок</a></li>
@@ -436,7 +537,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="hero-bg" aria-hidden="true"><span>PALERMO · SICILIA · PALERMO · SICILIA · </span></div>
   <div class="wrap">
     <div class="hero-head">
-      <p class="eyebrow fade-up" data-i18n="hero_eyebrow">Гид по Палермо · Сицилия</p>
+      <p class="eyebrow fade-up" data-i18n="hero_eyebrow">Гид в Палермо и по Сицилии</p>
       <h1>
         <span class="h1-sm fade-up" style="animation-delay:.1s" data-i18n="hero_l1">Прогулки по</span>
         <span class="h1-xl" id="bigword" data-i18n="hero_l2">Палермо</span>
@@ -453,7 +554,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     </figure>
 
     <div class="hero-cta fade-up" style="animation-delay:.9s">
-      <p data-i18n="hero_lede">Арабо-норманнский собор, барочные церкви, шумный рынок Капо и площади старого города. Индивидуально или большой компанией, в спокойном темпе и с живым рассказом о городе, который сложно не полюбить.</p>
+      <p data-i18n="hero_lede">Арабо-норманнский собор, барочные церкви, шумный рынок Капо и площади старого города, а ещё поездки в Монреале, Чефалу и Каккамо. Индивидуально или большой компанией, в спокойном темпе и с живым рассказом о Сицилии, которую сложно не полюбить.</p>
       <div class="btns">
         <a class="btn red" data-wa="book" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg><span data-i18n="cta_wa">Записаться в WhatsApp</span></a>
         <a class="btn ghost" href="https://t.me/Natallia_italy"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 3.6 2.9 10.7c-1.3.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.5-1.3zM9.6 14.3l-.4 3.6-1.3-4.3 9.7-6.1c.5-.3.9 0 .5.3z"/></svg><span>Telegram</span></a>
@@ -482,6 +583,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <figure><img src="img/g2.jpg" alt="" loading="lazy"></figure>
     <figure><img src="img/g9.jpg" alt="" loading="lazy"></figure>
     <figure><img src="img/g10.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g11.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g14.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g12.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g15.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g16.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g13.jpg" alt="" loading="lazy"></figure>
   </div>
 </div>
 
@@ -520,19 +627,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
     </article>
 
-    <article class="tour alt rv">
-      <div class="tour-img arch"><img src="img/tour-around.jpg" alt="Замок на скале в окрестностях Палермо" loading="lazy"></div>
-      <div>
-        <span class="tag" data-i18n="t2_tag">С трансфером</span>
-        <h3 data-i18n="t2_title">Палермо и окрестности</h3>
-        <p data-i18n="t2_desc">Расширенная программа: Палермо и городки в его окрестностях, с трансфером. Отличный вариант, если хочется увидеть больше, чем исторический центр.</p>
-        <div class="price"><b class="small" data-i18n="t2_price_b">По запросу</b><span data-i18n="t2_price">маршрут и стоимость в переписке</span></div>
-        <p class="note">&nbsp;</p>
-        <div class="btns">
-          <a class="btn" data-wa="around" href="#"><span data-i18n="cta_more">Узнать подробнее</span></a>
-        </div>
-      </div>
-    </article>
+    <a class="near-link rv" href="#around">
+      <span data-i18n="near_also">Также рядом с Палермо:</span>
+      <b>Монреале · Чефалу · Каккамо</b>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
   </div>
 </section>
 
@@ -554,32 +653,156 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <span class="progress" id="progress" aria-hidden="true"></span>
       <li class="stop rv"><span class="n">1</span>
         <div><span class="kind" data-i18n="k_out">Внешний осмотр</span><h3 data-i18n="s1">Театр Массимо</h3><p data-i18n="s1d">Крупнейший оперный театр Италии и одна из визитных карточек Палермо.</p></div>
+        <div class="thumbs"><button class="thumb" type="button" data-g="massimo" data-i="0" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/t/s-massimo.jpg" alt="" loading="lazy"></button></div>
       </li>
       <li class="stop rv"><span class="n">2</span>
         <div><span class="kind" data-i18n="k_visit">Посещение</span><h3 data-i18n="s2">Исторический рынок Капо</h3><p data-i18n="s2d">Прилавки, ароматы и голоса старого города: место, где Палермо живёт каждый день.</p></div>
       </li>
       <li class="stop rv"><span class="n">3</span>
         <div><span class="kind" data-i18n="k_visit">Посещение</span><h3 data-i18n="s3">Кафедральный собор</h3><p data-i18n="s3d">Главный храм города, в облике которого соединились арабо-норманнские, готические и классические черты.</p></div>
-        <div class="thumbs"><div class="thumb"><img src="img/cathedral.jpg" alt="" loading="lazy"></div></div>
+        <div class="thumbs"><button class="thumb" type="button" data-g="cathedral" data-i="0" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/cathedral.jpg" alt="" loading="lazy"></button></div>
       </li>
       <li class="stop rv"><span class="n">4</span>
         <div><span class="kind" data-i18n="k_out">Внешний осмотр</span><h3 data-i18n="s4">Площадь Претория и Четыре угла</h3><p data-i18n="s4d">Фонтан Претория с его скульптурами и барочный перекрёсток Куаттро Канти в самом сердце старого города.</p></div>
-        <div class="thumbs"><div class="thumb"><img src="img/pretoria.jpg" alt="" loading="lazy"></div><div class="thumb"><img src="img/quattro-canti.jpg" alt="" loading="lazy"></div></div>
+        <div class="thumbs"><button class="thumb" type="button" data-g="pretoria" data-i="0" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/t/s-pretoria-1.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" data-g="pretoria" data-i="1" data-more="+2" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/t/s-canti-1.jpg" alt="" loading="lazy"></button></div>
       </li>
       <li class="stop rv"><span class="n">5</span>
         <div><span class="kind" data-i18n="k_visit">Посещение</span><h3 data-i18n="s5">Церковь Марторана</h3><p data-i18n="s5d">Знаменитые византийские мозаики XII века.</p>
           <ul class="chips"><li data-i18n="s5c1">Билет 3 €</li><li data-i18n="s5c2">Вход до 13:00</li><li data-i18n="s5c3">В воскресенье закрыта</li></ul></div>
-        <div class="thumbs"><div class="thumb"><img src="img/martorana.jpg" alt="" loading="lazy"></div></div>
+        <div class="thumbs"><button class="thumb" type="button" data-g="martorana" data-i="0" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/martorana.jpg" alt="" loading="lazy"></button></div>
       </li>
       <li class="stop rv"><span class="n">6</span>
         <div><span class="kind" data-i18n="k_visit">Посещение</span><h3 data-i18n="s6">Церковь св. Екатерины Александрийской</h3><p data-i18n="s6d">Яркий пример искусства эпохи барокко, XVI век.</p>
           <ul class="chips"><li data-i18n="s6c1">Билет 2 €</li></ul></div>
+        <div class="thumbs"><button class="thumb" type="button" data-g="caterina" data-i="0" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/t/s-caterina-1.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" data-g="caterina" data-i="1" data-more="+2" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/t/s-caterina-2.jpg" alt="" loading="lazy"></button></div>
       </li>
       <li class="stop rv"><span class="n">7</span>
         <div><span class="kind" data-i18n="k_visit">Посещение</span><h3 data-i18n="s7">Ораторий Сан-Лоренцо</h3><p data-i18n="s7d">Барокко, переходящее в рококо, и скульптуры XVII века.</p>
           <ul class="chips"><li data-i18n="s5c1">Билет 3 €</li></ul></div>
+        <div class="thumbs"><button class="thumb" type="button" data-g="lorenzo" data-i="0" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/t/s-lorenzo-1.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" data-g="lorenzo" data-i="1" data-more="+1" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/t/s-lorenzo-2.jpg" alt="" loading="lazy"></button></div>
       </li>
     </ol>
+  </div>
+</section>
+
+<!-- NEARBY -->
+<section class="section around" id="around">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="eyebrow" data-i18n="near_eyebrow">Рядом с Палермо</p>
+        <h2 class="h2" data-i18n="near_title">Экскурсии в окрестностях</h2>
+      </div>
+      <p class="lead" data-i18n="near_lead">Монреале, Чефалу и Каккамо: короткие поездки из Палермо, каждую легко уместить в один день. Помогу с организацией трансфера.</p>
+    </div>
+    <article class="near rv" id="tour-monreale">
+      <div class="near-gal">
+        <button class="near-main arch" type="button" data-g="monreale" data-i="0" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/mon-1.jpg" alt="Золотые мозаики собора Монреале" loading="lazy"></button>
+        <div class="near-strip"><button class="thumb" type="button" data-g="monreale" data-i="1" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/t/mon-3.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" data-g="monreale" data-i="2" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/t/mon-2.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" data-g="monreale" data-i="3" data-more="+4" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/t/mon-8.jpg" alt="" loading="lazy"></button></div>
+      </div>
+      <div class="near-body">
+        <span class="tag" data-i18n="monreale_tag">Пешеходная · около 2 часов</span>
+        <h3 data-i18n="monreale_title">Монреале</h3>
+        <p class="near-sub" data-i18n="monreale_sub">Золото мозаик, норманнские короли и история Сицилии</p>
+        <p data-i18n="monreale_p1">Всего в нескольких километрах от Палермо находится Монреале — небольшой город, прославившийся одним из самых впечатляющих памятников норманнской Сицилии.</p>
+        <details class="near-more">
+          <summary><span class="sm-open" data-i18n="near_more">Подробнее о программе</span><span class="sm-close" data-i18n="near_less">Свернуть</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="near-text"><p data-i18n="monreale_p2">Главная цель нашей прогулки — Кафедральный собор Монреале, построенный в XII веке по воле короля Вильгельма II. Мы познакомимся с историей его создания, узнаем о соперничестве королевской и церковной власти и разберёмся, почему этот храм стал символом могущества норманнских правителей.</p><p data-i18n="monreale_p3">Внутри нас ждут знаменитые золотые мозаики, покрывающие тысячи квадратных метров стен. Рассмотрим библейские сюжеты, узнаем, как читать их изображения, и поговорим о том, как византийские, арабские и западноевропейские традиции соединились в одном архитектурном шедевре.</p><p data-i18n="monreale_p4">Прогуляемся по историческому центру Монреале, познакомимся с его атмосферой и полюбуемся панорамой долины Конка-д’Оро.</p></div>
+        </details>
+        <div class="near-facts">
+          <b data-i18n="near_facts">Важные моменты</b>
+          <ul><li data-i18n="monreale_f1">Продолжительность: около 2 часов</li><li data-i18n="monreale_f2">Формат: пешеходная экскурсия по Монреале с посещением собора</li><li data-i18n="monreale_f3">Желательно: покрытые плечи и колени для посещения собора</li><li data-i18n="monreale_f4">Помощь в организации трансфера до Монреале</li><li data-i18n="monreale_f5">Возможно также дополнительно включить в экскурсию посещение клуатра</li></ul>
+        </div>
+        <div class="btns">
+          <a class="btn red" data-wa="monreale" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg><span data-i18n="cta_ask">Спросить в WhatsApp</span></a>
+        </div>
+      </div>
+    </article>
+    <article class="near alt rv" id="tour-cefalu">
+      <div class="near-gal">
+        <button class="near-main arch" type="button" data-g="cefalu" data-i="0" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/cef-1.jpg" alt="Кафедральный собор Чефалу" loading="lazy"></button>
+        <div class="near-strip"><button class="thumb" type="button" data-g="cefalu" data-i="1" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/t/cef-2.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" data-g="cefalu" data-i="2" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/t/cef-3.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" data-g="cefalu" data-i="3" data-more="+5" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/t/cef-9.jpg" alt="" loading="lazy"></button></div>
+      </div>
+      <div class="near-body">
+        <span class="tag" data-i18n="cefalu_tag">Пешеходная · около 2,5 часов</span>
+        <h3 data-i18n="cefalu_title">Чефалу</h3>
+        <p class="near-sub" data-i18n="cefalu_sub">Между морем и историей — прогулка по старинному городу</p>
+        <p data-i18n="cefalu_p1">Чефалу — город, который стоит не только увидеть, но и почувствовать: в его улочках, историях и неспешном ритме жизни у моря.</p>
+        <details class="near-more">
+          <summary><span class="sm-open" data-i18n="near_more">Подробнее о программе</span><span class="sm-close" data-i18n="near_less">Свернуть</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="near-text"><p data-i18n="cefalu_p2">Начнём прогулку с исторического центра, где узкие улочки ведут к небольшим площадям, старинным дворцам и неожиданным видам на море. Увидим средневековую прачечную (Lavatoio Medievale), узнаем о повседневной жизни горожан и заглянем в старый рыбацкий квартал.</p><p data-i18n="cefalu_p3">Конечно, не обойдём стороной и знаменитый Кафедральный собор XII века, построенный по воле короля Рожера II. Поговорим о его необычной истории, архитектуре и великолепных византийских мозаиках.</p><p data-i18n="cefalu_p4">Пройдём по старинным улицам к морю, где сохранился один из самых узнаваемых видов Чефалу — рыбацкие домики, выходящие прямо к воде, и скала Ла-Рокка, возвышающаяся над городом.</p><p data-i18n="cefalu_p5">По пути узнаем, как менялся Чефалу на протяжении веков, какие традиции сохранились до наших дней и чем живёт город за пределами туристического сезона.</p></div>
+        </details>
+        <div class="near-facts">
+          <b data-i18n="near_facts">Важные моменты</b>
+          <ul><li data-i18n="cefalu_f1">Продолжительность: около 2,5 часов</li><li data-i18n="cefalu_f2">Формат: пешеходная экскурсия по историческому центру с посещением Кафедрального собора</li><li data-i18n="cefalu_f3">Помощь в организации трансфера</li><li data-i18n="cefalu_f4">Возможность включить в посещение археологический парк Имеры (находится по дороге в г. Чефалу со стороны Палермо)</li></ul>
+        </div>
+        <div class="btns">
+          <a class="btn red" data-wa="cefalu" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg><span data-i18n="cta_ask">Спросить в WhatsApp</span></a>
+        </div>
+      </div>
+    </article>
+    <article class="near rv" id="tour-caccamo">
+      <div class="near-gal">
+        <button class="near-main arch" type="button" data-g="caccamo" data-i="0" data-i18n-aria="open_photo" aria-label="Открыть фото"><img src="img/cac-1.jpg" alt="Каккамо" loading="lazy"></button>
+        
+      </div>
+      <div class="near-body">
+        <span class="tag" data-i18n="caccamo_tag">Пешеходная · около 2,5–3 часов</span>
+        <h3 data-i18n="caccamo_title">Каккамо</h3>
+        <p class="near-sub" data-i18n="caccamo_sub">Средневековый замок среди сицилийских холмов</p>
+        <p data-i18n="caccamo_p1">Приглашаю вас в Каккамо — живописный средневековый городок среди сицилийских холмов, где узкие каменные улочки, старинные церкви и величественный замок хранят истории прошлых веков.</p>
+        <details class="near-more">
+          <summary><span class="sm-open" data-i18n="near_more">Подробнее о программе</span><span class="sm-close" data-i18n="near_less">Свернуть</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="near-text"><p data-i18n="caccamo_p2">Главная часть нашей экскурсии — посещение замка Каккамо, одной из самых впечатляющих средневековых крепостей Сицилии. Мы узнаем о могущественных феодальных семьях, дворцовых интригах, легендах и повседневной жизни обитателей замка.</p><p data-i18n="caccamo_p3">Во время прогулки по историческому центру посетим церковь Сан-Бенедетто-алла-Бадия (Chiesa di San Benedetto alla Badia) и главный собор города (Chiesa Madre di San Giorgio Martire), где хранится произведение знаменитого художника XVII века Маттиаса Стомера, мастера драматического света и тени, последователя Караваджо.</p><p data-i18n="caccamo_p4">Поговорим о средневековой архитектуре, религиозных традициях и художественном наследии Сицилии, а с панорамных площадок полюбуемся видами на окрестные горы и озеро Розамарина.</p></div>
+        </details>
+        <div class="near-facts">
+          <b data-i18n="near_facts">Важные моменты</b>
+          <ul><li data-i18n="caccamo_f1">Продолжительность: около 2,5–3 часов</li><li data-i18n="caccamo_f2">Формат: пешеходная экскурсия с посещением замка и двух исторических церквей</li><li data-i18n="caccamo_f3">Помощь в организации трансфера до г. Каккамо</li></ul>
+        </div>
+        <div class="btns">
+          <a class="btn red" data-wa="caccamo" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg><span data-i18n="cta_ask">Спросить в WhatsApp</span></a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services" id="services">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="eyebrow" data-i18n="sv_eyebrow">Доп. услуги</p>
+        <h2 class="h2" data-i18n="sv_title">Не только экскурсии</h2>
+      </div>
+      <p class="lead" data-i18n="sv_lead">Помогу сделать поездку на Сицилию лёгкой и красивой: от фотосессии до маршрута по всему острову.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc big rv">
+        <span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.6"/></svg></span>
+        <h3 data-i18n="sv1_t">Экскурсия + фотосессия</h3>
+        <p data-i18n="sv1_d">Организация фотосессий и съёмок. Экскурсию и фотосессию можно совместить: вы экономите время и не ходите дважды по тем же местам, а домой везёте ценный багаж не только впечатлений, но и красивые профессиональные фото от фотографа.</p>
+        <a class="svc-link" data-wa="sv1" href="#"><span data-i18n="cta_discuss">Обсудить</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </article>
+      <article class="svc rv">
+        <span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="14" r="5"/><circle cx="15" cy="14" r="5"/><path d="M10 4l2 3 2-3"/></svg></span>
+        <h3 data-i18n="sv2_t">Свадьбы и праздники</h3>
+        <p data-i18n="sv2_d">Помощь в организации свадеб, девичников и других праздничных и официальных мероприятий.</p>
+        <a class="svc-link" data-wa="sv2" href="#"><span data-i18n="cta_discuss">Обсудить</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </article>
+      <article class="svc rv">
+        <span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16v-4l2-5h14l2 5v4a1 1 0 0 1-1 1h-1M3 16a1 1 0 0 0 1 1h1M8 17h8"/><circle cx="6.5" cy="17" r="1.8"/><circle cx="17.5" cy="17" r="1.8"/><path d="M3.5 12h17"/></svg></span>
+        <h3 data-i18n="sv3_t">Трансфер по острову</h3>
+        <p data-i18n="sv3_d">Организация трансфера по Сицилии, чтобы спокойно добраться до нужного города или на экскурсию.</p>
+        <a class="svc-link" data-wa="sv3" href="#"><span data-i18n="cta_discuss">Обсудить</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </article>
+      <article class="svc rv">
+        <span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg></span>
+        <h3 data-i18n="sv4_t">Маршруты по Сицилии</h3>
+        <p data-i18n="sv4_d">Составление и организация туристических маршрутов по острову.</p>
+        <a class="svc-link" data-wa="sv4" href="#"><span data-i18n="cta_discuss">Обсудить</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -625,7 +848,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <p class="eyebrow" data-i18n="rev_eyebrow">Отзывы</p>
         <h2 class="h2" data-i18n="rev_title">Слова гостей</h2>
       </div>
-      <p class="lead" data-i18n="rev_lead">Были на прогулке по Палермо? Поделитесь впечатлениями, и ваш отзыв появится здесь.</p>
+      <p class="lead" data-i18n="rev_lead">Были на экскурсии? Поделитесь впечатлениями, и ваш отзыв появится здесь.</p>
     </div>
     <div class="rev-grid rv">
       <div class="rev-list" id="revList" aria-live="polite"></div>
@@ -652,22 +875,29 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="wrap gift-grid">
     <div class="rv">
       <p class="eyebrow" data-i18n="gift_eyebrow">Подарок</p>
-      <h2 class="h2" data-i18n="gift_title">Подарите прогулку по Палермо</h2>
+      <h2 class="h2" data-i18n="gift_title">Подарите экскурсию на Сицилии</h2>
       <p class="lead" data-i18n="gift_lead">Экскурсия в подарок для мамы, подруги, любимого человека или друзей, которые собираются на Сицилию. Подарок, который запомнится надолго.</p>
       <ol class="steps">
         <li><p><b data-i18n="g1b">Напишите мне</b><span data-i18n="g1s">В WhatsApp или Telegram, кому хотите сделать подарок</span></p></li>
         <li><p><b data-i18n="g2b">Обсудим детали</b><span data-i18n="g2s">Формат экскурсии и примерные даты поездки</span></p></li>
         <li><p><b data-i18n="g3b">Дарите</b><span data-i18n="g3s">Красивый сертификат для вашего близкого человека</span></p></li>
       </ol>
+      <p class="gift-pick-l" id="giftPickL" data-i18n="gift_pick">Какую экскурсию подарить?</p>
+      <div class="gift-pick" id="giftPick" role="radiogroup" aria-labelledby="giftPickL">
+        <button type="button" role="radio" aria-checked="true" data-k="palermo" data-i18n="gp_palermo">Палермо</button>
+        <button type="button" role="radio" aria-checked="false" data-k="monreale" data-i18n="gp_monreale">Монреале</button>
+        <button type="button" role="radio" aria-checked="false" data-k="cefalu" data-i18n="gp_cefalu">Чефалу</button>
+        <button type="button" role="radio" aria-checked="false" data-k="caccamo" data-i18n="gp_caccamo">Каккамо</button>
+      </div>
       <div class="btns">
-        <a class="btn light" data-wa="gift" href="#"><span data-i18n="cta_gift">Подарить экскурсию</span></a>
+        <a class="btn light" data-wa="gift_palermo" id="giftBtn" href="#"><span data-i18n="cta_gift">Подарить экскурсию</span></a>
       </div>
     </div>
     <div class="cert-wrap rv">
       <div class="cert tiles" id="cert">
         <div class="cert-in">
           <div class="cert-top"><span>Certificato regalo<br>Palermo · Sicilia</span><span class="seal">N</span></div>
-          <h3><small data-i18n="cert_s">Подарочный сертификат</small><span data-i18n="cert_t">Прогулка по Палермо</span></h3>
+          <h3><small data-i18n="cert_s">Подарочный сертификат</small><span id="certT" data-i18n="cert_palermo">Прогулка по Палермо</span></h3>
           <div class="cert-bot"><span class="for" data-i18n="cert_for">Для</span><span class="sign">Natallia</span></div>
         </div>
       </div>
@@ -712,6 +942,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </footer>
 
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Фото" hidden>
+  <figure><img id="lbImg" alt=""></figure>
+  <button class="lb-x" id="lbX" type="button" data-i18n-aria="menu_close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <button class="lb-p" id="lbP" type="button" data-i18n-aria="prev" aria-label="Назад"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button class="lb-n" id="lbN" type="button" data-i18n-aria="next" aria-label="Вперёд"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  <p class="lb-c" id="lbC"></p>
+</div>
+
 <div class="mcta" id="mcta">
   <a class="btn red" data-wa="book" href="#"><span data-i18n="cta_wa">Записаться в WhatsApp</span></a>
   <a class="btn sq" href="https://t.me/Natallia_italy" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 3.6 2.9 10.7c-1.3.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.5-1.3zM9.6 14.3l-.4 3.6-1.3-4.3 9.7-6.1c.5-.3.9 0 .5.3z"/></svg></a>
@@ -724,17 +962,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     ru:{
       nav_tours:"Экскурсии",nav_route:"Маршрут",nav_about:"О себе",nav_gift:"Подарок",nav_reviews:"Отзывы",menu:"Меню",menu_close:"Закрыть",nav_contact:"Контакты",
       cta_short:"Записаться",cta_wa:"Записаться в WhatsApp",cta_book:"Хочу на экскурсию",cta_price:"Узнать стоимость",cta_route:"Смотреть маршрут",cta_more:"Узнать подробнее",cta_gift:"Подарить экскурсию",cta_ig:"Instagram Натальи",
-      hero_eyebrow:"Гид по Палермо · Сицилия",hero_l1:"Прогулки по",hero_l2:"Палермо",hero_l3:"с Натальей",
-      hero_lede:"Арабо-норманнский собор, барочные церкви, шумный рынок Капо и площади старого города. Индивидуально или большой компанией, в спокойном темпе и с живым рассказом о городе, который сложно не полюбить.",
+      hero_eyebrow:"Гид в Палермо и по Сицилии",hero_l1:"Прогулки по",hero_l2:"Палермо",hero_l3:"с Натальей",
+      hero_lede:"Арабо-норманнский собор, барочные церкви, шумный рынок Капо и площади старого города, а ещё поездки в Монреале, Чефалу и Каккамо. Индивидуально или большой компанией, в спокойном темпе и с живым рассказом о Сицилии, которую сложно не полюбить.",
       f1b:"3 ч",f1s:"длительность",f2b:"4 км",f2s:"пешком по центру",f3b:"RU · EN",f3s:"языки экскурсий",
       tours_eyebrow:"Экскурсии",tours_title:"Выберите свою прогулку",tours_lead:"Индивидуальные экскурсии и экскурсии для больших групп: без спешки и без заученного текста. Провожу их на русском или английском, в зависимости от аудитории.",
       t1_tag:"Пешеходная · около 3 часов",t1_title:"Обзорная экскурсия по Палермо",
       t1_desc:"Главные сокровища исторического центра за одно утро: от Театра Массимо и рынка Капо до Кафедрального собора, площади Претория и барочных интерьеров, от которых захватывает дух.",
       c1:"Театр Массимо",c2:"Рынок Капо",c3:"Кафедральный собор",c4:"Площадь Претория",c5:"Четыре угла",c6:"Марторана",c7:"+ 2 барочные жемчужины",
       price_b:"Стоимость — в личном сообщении",price_s:"Цена зависит от количества человек и от того, нужны ли наушники для большой группы.",
-      t2_tag:"С трансфером",t2_title:"Палермо и окрестности",
-      t2_desc:"Расширенная программа: Палермо и городки в его окрестностях, с трансфером. Отличный вариант, если хочется увидеть больше, чем исторический центр.",
-      t2_price_b:"По запросу",t2_price:"маршрут и стоимость в переписке",
       route_eyebrow:"Маршрут",route_title:"Семь остановок старого Палермо",route_lead:"Около четырёх километров неспешным шагом: улицы, рынок, площади и церкви, в которые стоит заглянуть.",
       w1b:"Начало в 10:00 или 10:30",w1s:"Продолжительность около 3 часов",w2b:"Удобная обувь",w2s:"И вода: её можно купить по дороге",w3b:"Плечи и колени закрыты",w3s:"Желательно для посещения церквей",
       k_out:"Внешний осмотр",k_visit:"Посещение",
@@ -750,35 +985,109 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       about_p1:"Здравствуйте! Меня зовут Наталья, и я провожу экскурсии по Палермо и его окрестностям. Я покажу вам город не по путеводителю: с его рынками, барокко, арабо-норманнскими соборами и историями, которые прячутся в переулках.",
       about_p2:"Работаю и в индивидуальном формате, и с большими группами. Экскурсии провожу на русском или английском, в зависимости от аудитории. Напишите мне, и мы вместе подберём удобный день.",
       v1b:"Индивидуально и группы",v1s:"Для семьи, друзей и больших компаний",v2b:"Спокойный темп",v2s:"Без спешки, с остановками для фото",v3b:"На связи",v3s:"WhatsApp, Telegram и Instagram",
-      rev_eyebrow:"Отзывы",rev_title:"Слова гостей",rev_lead:"Были на прогулке по Палермо? Поделитесь впечатлениями, и ваш отзыв появится здесь.",
-      rev_empty_t:"Здесь появятся отзывы гостей",rev_empty_s:"Станьте первым, кто расскажет о прогулке по Палермо.",
+      rev_eyebrow:"Отзывы",rev_title:"Слова гостей",rev_lead:"Были на экскурсии? Поделитесь впечатлениями, и ваш отзыв появится здесь.",
+      rev_empty_t:"Здесь появятся отзывы гостей",rev_empty_s:"Станьте первым, кто расскажет о своей экскурсии.",
       rev_form_t:"Оставить отзыв",rev_name:"Ваше имя",rev_rating:"Оценка",rev_text:"Ваш отзыв",rev_text_ph:"Что запомнилось больше всего?",rev_send:"Отправить отзыв",rev_sending:"Отправляю…",
       rev_note:"Отзыв появится на сайте после того, как Наталья его прочитает.",rev_thanks:"Спасибо! Отзыв отправлен Наталье на проверку.",rev_thanks_demo:" Демо-режим: пока отзыв виден только вам.",
       rev_err_fill:"Укажите имя и напишите хотя бы пару предложений.",rev_err_rating:"Поставьте оценку звёздами.",rev_err_wait:"Вы только что отправили отзыв. Подождите минуту и попробуйте снова.",rev_err_send:"Не получилось отправить. Попробуйте ещё раз чуть позже.",rev_own:"Виден только вам (демо)",
-      gift_eyebrow:"Подарок",gift_title:"Подарите прогулку по Палермо",gift_lead:"Экскурсия в подарок для мамы, подруги, любимого человека или друзей, которые собираются на Сицилию. Подарок, который запомнится надолго.",
+      gift_eyebrow:"Подарок",gift_title:"Подарите экскурсию на Сицилии",gift_lead:"Экскурсия в подарок для мамы, подруги, любимого человека или друзей, которые собираются на Сицилию. Подарок, который запомнится надолго.",
       g1b:"Напишите мне",g1s:"В WhatsApp или Telegram, кому хотите сделать подарок",g2b:"Обсудим детали",g2s:"Формат экскурсии и примерные даты поездки",g3b:"Дарите",g3s:"Красивый сертификат для вашего близкого человека",
-      cert_s:"Подарочный сертификат",cert_t:"Прогулка по Палермо",cert_for:"Для",
+      cert_s:"Подарочный сертификат",cert_for:"Для",
       contact_eyebrow:"Контакты",contact_lead:"До встречи в Палермо. Напишите в удобный мессенджер: расскажите, сколько вас и когда вы планируете приехать.",
       foot:"Гид в Палермо",
       wa_book:"Здравствуйте, Наталья! Хочу записаться на обзорную экскурсию по Палермо и узнать стоимость.\n\nДата: \nКоличество человек: \nЯзык экскурсии (русский / английский): ",
-      wa_around:"Здравствуйте, Наталья! Интересует экскурсия по Палермо и окрестностям с трансфером.",
-      wa_gift:"Здравствуйте, Наталья! Хочу подарить экскурсию по Палермо.",
+            monreale_p2:"Главная цель нашей прогулки — Кафедральный собор Монреале, построенный в XII веке по воле короля Вильгельма II. Мы познакомимся с историей его создания, узнаем о соперничестве королевской и церковной власти и разберёмся, почему этот храм стал символом могущества норманнских правителей.",
+      monreale_p3:"Внутри нас ждут знаменитые золотые мозаики, покрывающие тысячи квадратных метров стен. Рассмотрим библейские сюжеты, узнаем, как читать их изображения, и поговорим о том, как византийские, арабские и западноевропейские традиции соединились в одном архитектурном шедевре.",
+      monreale_p4:"Прогуляемся по историческому центру Монреале, познакомимся с его атмосферой и полюбуемся панорамой долины Конка-д’Оро.",
+      monreale_f1:"Продолжительность: около 2 часов",
+      monreale_f2:"Формат: пешеходная экскурсия по Монреале с посещением собора",
+      monreale_f3:"Желательно: покрытые плечи и колени для посещения собора",
+      monreale_f4:"Помощь в организации трансфера до Монреале",
+      monreale_f5:"Возможно также дополнительно включить в экскурсию посещение клуатра",
+      wa_monreale:"Здравствуйте, Наталья! Интересует экскурсия в Монреале.\n\nДата: \nКоличество человек: \nНужен ли трансфер: ",
+      monreale_tag:"Пешеходная · около 2 часов",
+      monreale_title:"Монреале",
+      monreale_sub:"Золото мозаик, норманнские короли и история Сицилии",
+      monreale_p1:"Всего в нескольких километрах от Палермо находится Монреале — небольшой город, прославившийся одним из самых впечатляющих памятников норманнской Сицилии.",
+      cefalu_p2:"Начнём прогулку с исторического центра, где узкие улочки ведут к небольшим площадям, старинным дворцам и неожиданным видам на море. Увидим средневековую прачечную (Lavatoio Medievale), узнаем о повседневной жизни горожан и заглянем в старый рыбацкий квартал.",
+      cefalu_p3:"Конечно, не обойдём стороной и знаменитый Кафедральный собор XII века, построенный по воле короля Рожера II. Поговорим о его необычной истории, архитектуре и великолепных византийских мозаиках.",
+      cefalu_p4:"Пройдём по старинным улицам к морю, где сохранился один из самых узнаваемых видов Чефалу — рыбацкие домики, выходящие прямо к воде, и скала Ла-Рокка, возвышающаяся над городом.",
+      cefalu_p5:"По пути узнаем, как менялся Чефалу на протяжении веков, какие традиции сохранились до наших дней и чем живёт город за пределами туристического сезона.",
+      cefalu_f1:"Продолжительность: около 2,5 часов",
+      cefalu_f2:"Формат: пешеходная экскурсия по историческому центру с посещением Кафедрального собора",
+      cefalu_f3:"Помощь в организации трансфера",
+      cefalu_f4:"Возможность включить в посещение археологический парк Имеры (находится по дороге в г. Чефалу со стороны Палермо)",
+      wa_cefalu:"Здравствуйте, Наталья! Интересует экскурсия в Чефалу.\n\nДата: \nКоличество человек: \nНужен ли трансфер: ",
+      cefalu_tag:"Пешеходная · около 2,5 часов",
+      cefalu_title:"Чефалу",
+      cefalu_sub:"Между морем и историей — прогулка по старинному городу",
+      cefalu_p1:"Чефалу — город, который стоит не только увидеть, но и почувствовать: в его улочках, историях и неспешном ритме жизни у моря.",
+      caccamo_p2:"Главная часть нашей экскурсии — посещение замка Каккамо, одной из самых впечатляющих средневековых крепостей Сицилии. Мы узнаем о могущественных феодальных семьях, дворцовых интригах, легендах и повседневной жизни обитателей замка.",
+      caccamo_p3:"Во время прогулки по историческому центру посетим церковь Сан-Бенедетто-алла-Бадия (Chiesa di San Benedetto alla Badia) и главный собор города (Chiesa Madre di San Giorgio Martire), где хранится произведение знаменитого художника XVII века Маттиаса Стомера, мастера драматического света и тени, последователя Караваджо.",
+      caccamo_p4:"Поговорим о средневековой архитектуре, религиозных традициях и художественном наследии Сицилии, а с панорамных площадок полюбуемся видами на окрестные горы и озеро Розамарина.",
+      caccamo_f1:"Продолжительность: около 2,5–3 часов",
+      caccamo_f2:"Формат: пешеходная экскурсия с посещением замка и двух исторических церквей",
+      caccamo_f3:"Помощь в организации трансфера до г. Каккамо",
+      wa_caccamo:"Здравствуйте, Наталья! Интересует экскурсия в Каккамо.\n\nДата: \nКоличество человек: \nНужен ли трансфер: ",
+      caccamo_tag:"Пешеходная · около 2,5–3 часов",
+      caccamo_title:"Каккамо",
+      caccamo_sub:"Средневековый замок среди сицилийских холмов",
+      caccamo_p1:"Приглашаю вас в Каккамо — живописный средневековый городок среди сицилийских холмов, где узкие каменные улочки, старинные церкви и величественный замок хранят истории прошлых веков.",
+      near_eyebrow:"Рядом с Палермо",
+      near_title:"Экскурсии в окрестностях",
+      near_lead:"Монреале, Чефалу и Каккамо: короткие поездки из Палермо, каждую легко уместить в один день. Помогу с организацией трансфера.",
+      near_more:"Подробнее о программе",
+      near_less:"Свернуть",
+      near_facts:"Важные моменты",
+      cta_ask:"Спросить в WhatsApp",
+      wa_sv1:"Здравствуйте, Наталья! Интересует экскурсия с фотосессией.",
+      sv1_t:"Экскурсия + фотосессия",
+      sv1_d:"Организация фотосессий и съёмок. Экскурсию и фотосессию можно совместить: вы экономите время и не ходите дважды по тем же местам, а домой везёте ценный багаж не только впечатлений, но и красивые профессиональные фото от фотографа.",
+      wa_sv2:"Здравствуйте, Наталья! Хочу обсудить помощь в организации мероприятия.",
+      sv2_t:"Свадьбы и праздники",
+      sv2_d:"Помощь в организации свадеб, девичников и других праздничных и официальных мероприятий.",
+      wa_sv3:"Здравствуйте, Наталья! Интересует трансфер по Сицилии.",
+      sv3_t:"Трансфер по острову",
+      sv3_d:"Организация трансфера по Сицилии, чтобы спокойно добраться до нужного города или на экскурсию.",
+      wa_sv4:"Здравствуйте, Наталья! Хочу составить маршрут по Сицилии.",
+      sv4_t:"Маршруты по Сицилии",
+      sv4_d:"Составление и организация туристических маршрутов по острову.",
+      cta_discuss:"Обсудить",
+      sv_eyebrow:"Доп. услуги",
+      sv_title:"Не только экскурсии",
+      sv_lead:"Помогу сделать поездку на Сицилию лёгкой и красивой: от фотосессии до маршрута по всему острову.",
+      near_also:"Также рядом с Палермо:",
+      nav_around:"Окрестности",
+      nav_services:"Услуги",
+      gift_pick:"Какую экскурсию подарить?",
+      gp_palermo:"Палермо",
+      gp_monreale:"Монреале",
+      gp_cefalu:"Чефалу",
+      gp_caccamo:"Каккамо",
+      cert_palermo:"Прогулка по Палермо",
+      cert_monreale:"Экскурсия в Монреале",
+      cert_cefalu:"Экскурсия в Чефалу",
+      cert_caccamo:"Экскурсия в Каккамо",
+      wa_gift_palermo:"Здравствуйте, Наталья! Хочу подарить обзорную экскурсию по Палермо.",
+      wa_gift_monreale:"Здравствуйте, Наталья! Хочу подарить экскурсию в Монреале.",
+      wa_gift_cefalu:"Здравствуйте, Наталья! Хочу подарить экскурсию в Чефалу.",
+      wa_gift_caccamo:"Здравствуйте, Наталья! Хочу подарить экскурсию в Каккамо.",
+      open_photo:"Открыть фото",
+      prev:"Назад",
+      next:"Вперёд",
       title:"Natallia · Палермо"
     },
     en:{
       nav_tours:"Tours",nav_route:"Route",nav_about:"About",nav_gift:"Gift",nav_reviews:"Reviews",menu:"Menu",menu_close:"Close",nav_contact:"Contact",
       cta_short:"Book",cta_wa:"Book on WhatsApp",cta_book:"Book this tour",cta_price:"Ask the price",cta_route:"See the route",cta_more:"Ask for details",cta_gift:"Give a tour",cta_ig:"Natallia on Instagram",
-      hero_eyebrow:"Palermo guide · Sicily",hero_l1:"Walks through",hero_l2:"Palermo",hero_l3:"with Natallia",
-      hero_lede:"An Arab‑Norman cathedral, baroque churches, the lively Capo market and the squares of the old town. Private walks or large groups, an easy pace and real stories about a city that is hard not to love.",
+      hero_eyebrow:"Guide in Palermo & Sicily",hero_l1:"Walks through",hero_l2:"Palermo",hero_l3:"with Natallia",
+      hero_lede:"An Arab‑Norman cathedral, baroque churches, the lively Capo market and the squares of the old town, plus day trips to Monreale, Cefalù and Caccamo. Private walks or large groups, an easy pace and real stories about a Sicily that is hard not to love.",
       f1b:"3 h",f1s:"duration",f2b:"4 km",f2s:"on foot in the centre",f3b:"RU · EN",f3s:"tour languages",
       tours_eyebrow:"Tours",tours_title:"Choose your walk",tours_lead:"Private tours and tours for large groups: no rush and no memorised script. Led in Russian or English, depending on your audience.",
       t1_tag:"Walking · about 3 hours",t1_title:"Palermo highlights tour",
       t1_desc:"The treasures of the historic centre in one morning: from Teatro Massimo and the Capo market to the Cathedral, Piazza Pretoria and baroque interiors that take your breath away.",
       c1:"Teatro Massimo",c2:"Capo market",c3:"Cathedral",c4:"Piazza Pretoria",c5:"Quattro Canti",c6:"La Martorana",c7:"+ 2 baroque gems",
       price_b:"Price by personal message",price_s:"The price depends on the number of guests and on whether a large group needs audio headsets.",
-      t2_tag:"With transfer",t2_title:"Palermo and surroundings",
-      t2_desc:"An extended programme: Palermo and the towns around it, with a transfer. A great choice if you want to see more than the historic centre.",
-      t2_price_b:"On request",t2_price:"route and price by message",
       route_eyebrow:"Route",route_title:"Seven stops in old Palermo",route_lead:"About four kilometres at an easy pace: streets, a market, squares and churches worth stepping into.",
       w1b:"Starts at 10:00 or 10:30",w1s:"Lasts about 3 hours",w2b:"Comfortable shoes",w2s:"And water, which you can buy on the way",w3b:"Shoulders and knees covered",w3s:"Recommended for visiting churches",
       k_out:"Seen from outside",k_visit:"Visit",
@@ -794,19 +1103,96 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       about_p1:"Hello! My name is Natallia and I guide tours in Palermo and its surroundings. I will show you the city beyond the guidebook: its markets, its baroque, its Arab‑Norman cathedrals and the stories hidden in its side streets.",
       about_p2:"I work one-on-one as well as with large groups, in Russian or English depending on who joins. Write to me and we will find a day that suits you.",
       v1b:"Private and groups",v1s:"For family, friends and large companies",v2b:"Easy pace",v2s:"No rush, with stops for photos",v3b:"Easy to reach",v3s:"WhatsApp, Telegram and Instagram",
-      rev_eyebrow:"Reviews",rev_title:"Words from guests",rev_lead:"Joined a walk through Palermo? Share your impressions and your review will appear here.",
-      rev_empty_t:"Guest reviews will appear here",rev_empty_s:"Be the first to tell others about your walk through Palermo.",
+      rev_eyebrow:"Reviews",rev_title:"Words from guests",rev_lead:"Been on a tour? Share your impressions and your review will appear here.",
+      rev_empty_t:"Guest reviews will appear here",rev_empty_s:"Be the first to tell others about your tour.",
       rev_form_t:"Leave a review",rev_name:"Your name",rev_rating:"Rating",rev_text:"Your review",rev_text_ph:"What stayed with you the most?",rev_send:"Send review",rev_sending:"Sending…",
       rev_note:"Your review will appear on the site once Natallia has read it.",rev_thanks:"Thank you! Your review has been sent to Natallia for approval.",rev_thanks_demo:" Demo mode: for now only you can see it.",
       rev_err_fill:"Please add your name and a few sentences.",rev_err_rating:"Please rate your walk with the stars.",rev_err_wait:"You have just sent a review. Please wait a minute and try again.",rev_err_send:"Could not send it. Please try again a little later.",rev_own:"Only visible to you (demo)",
-      gift_eyebrow:"Gift",gift_title:"Give a walk through Palermo",gift_lead:"A tour as a gift for your mum, a friend, your partner or anyone heading to Sicily. A present they will remember for a long time.",
+      gift_eyebrow:"Gift",gift_title:"Give a tour in Sicily",gift_lead:"A tour as a gift for your mum, a friend, your partner or anyone heading to Sicily. A present they will remember for a long time.",
       g1b:"Write to me",g1s:"On WhatsApp or Telegram, and tell me who the gift is for",g2b:"We agree the details",g2s:"The tour format and rough travel dates",g3b:"Give it",g3s:"A beautiful certificate for someone you love",
-      cert_s:"Gift certificate",cert_t:"A walk through Palermo",cert_for:"For",
+      cert_s:"Gift certificate",cert_for:"For",
       contact_eyebrow:"Contact",contact_lead:"See you in Palermo. Message me in any app and tell me how many of you there are and when you plan to come.",
       foot:"Guide in Palermo",
       wa_book:"Hello Natallia! I would like to book the Palermo highlights tour and ask the price.\n\nDate: \nNumber of people: \nTour language (Russian / English): ",
-      wa_around:"Hello Natallia! I am interested in the Palermo and surroundings tour with transfer.",
-      wa_gift:"Hello Natallia! I would like to give a Palermo tour as a gift.",
+            monreale_p2:"The main goal of our walk is Monreale Cathedral, built in the 12th century at the wish of King William II. We will learn how it was created, hear about the rivalry between royal and church power and find out why this church became a symbol of the might of the Norman rulers.",
+      monreale_p3:"Inside, the famous golden mosaics cover thousands of square metres of walls. We will look at the biblical scenes, learn how to read them and talk about how Byzantine, Arab and Western European traditions came together in one architectural masterpiece.",
+      monreale_p4:"We will stroll through the historic centre of Monreale, soak up its atmosphere and enjoy the view over the Conca d’Oro valley.",
+      monreale_f1:"Duration: about 2 hours",
+      monreale_f2:"Format: a walking tour of Monreale with a visit to the cathedral",
+      monreale_f3:"Recommended: covered shoulders and knees for the cathedral",
+      monreale_f4:"Help with arranging a transfer to Monreale",
+      monreale_f5:"A visit to the cloister can also be added to the tour",
+      wa_monreale:"Hello Natallia! I am interested in the Monreale tour.\n\nDate: \nNumber of people: \nDo we need a transfer: ",
+      monreale_tag:"Walking · about 2 hours",
+      monreale_title:"Monreale",
+      monreale_sub:"Golden mosaics, Norman kings and the history of Sicily",
+      monreale_p1:"Just a few kilometres from Palermo lies Monreale, a small town famous for one of the most impressive monuments of Norman Sicily.",
+      cefalu_p2:"We start in the historic centre, where narrow streets lead to small squares, old palazzi and unexpected views of the sea. We will see the medieval wash-house (Lavatoio Medievale), learn about the everyday life of the townspeople and look into the old fishermen’s quarter.",
+      cefalu_p3:"Of course, we will not miss the famous 12th-century Cathedral, built at the wish of King Roger II. We will talk about its unusual history, its architecture and its magnificent Byzantine mosaics.",
+      cefalu_p4:"Through the old streets we will walk down to the sea, to one of the most recognisable views of Cefalù: fishermen’s houses right on the water and La Rocca rising above the town.",
+      cefalu_p5:"Along the way we will find out how Cefalù has changed over the centuries, which traditions survive to this day and how the town lives outside the tourist season.",
+      cefalu_f1:"Duration: about 2.5 hours",
+      cefalu_f2:"Format: a walking tour of the historic centre with a visit to the Cathedral",
+      cefalu_f3:"Help with arranging a transfer",
+      cefalu_f4:"The archaeological park of Himera can be added (it lies on the way to Cefalù from Palermo)",
+      wa_cefalu:"Hello Natallia! I am interested in the Cefalù tour.\n\nDate: \nNumber of people: \nDo we need a transfer: ",
+      cefalu_tag:"Walking · about 2.5 hours",
+      cefalu_title:"Cefalù",
+      cefalu_sub:"Between the sea and history: a walk through the old town",
+      cefalu_p1:"Cefalù is a town you should not only see but feel: in its little streets, its stories and its unhurried rhythm of life by the sea.",
+      caccamo_p2:"The heart of our tour is a visit to Caccamo Castle, one of the most impressive medieval fortresses in Sicily. We will learn about powerful feudal families, palace intrigues, legends and the everyday life of the people who lived in the castle.",
+      caccamo_p3:"Walking through the historic centre, we will visit the church of San Benedetto alla Badia and the town’s main church, the Chiesa Madre di San Giorgio Martire, which keeps a work by the famous 17th-century painter Matthias Stom, a master of dramatic light and shadow and a follower of Caravaggio.",
+      caccamo_p4:"We will talk about medieval architecture, religious traditions and the artistic heritage of Sicily, and from the viewpoints we will admire the surrounding mountains and Lake Rosamarina.",
+      caccamo_f1:"Duration: about 2.5–3 hours",
+      caccamo_f2:"Format: a walking tour with visits to the castle and two historic churches",
+      caccamo_f3:"Help with arranging a transfer to Caccamo",
+      wa_caccamo:"Hello Natallia! I am interested in the Caccamo tour.\n\nDate: \nNumber of people: \nDo we need a transfer: ",
+      caccamo_tag:"Walking · about 2.5–3 hours",
+      caccamo_title:"Caccamo",
+      caccamo_sub:"A medieval castle among the Sicilian hills",
+      caccamo_p1:"I invite you to Caccamo, a picturesque medieval town among the Sicilian hills, where narrow stone streets, old churches and a majestic castle keep the stories of past centuries.",
+      near_eyebrow:"Near Palermo",
+      near_title:"Tours around Palermo",
+      near_lead:"Monreale, Cefalù and Caccamo: short trips from Palermo, each easy to fit into a single day. I can help you arrange the transfer.",
+      near_more:"More about the programme",
+      near_less:"Show less",
+      near_facts:"Good to know",
+      cta_ask:"Ask on WhatsApp",
+      wa_sv1:"Hello Natallia! I am interested in a tour with a photo shoot.",
+      sv1_t:"Tour + photo shoot",
+      sv1_d:"Photo shoots and filming arranged for you. Combine a tour and a photo shoot: you save time, you do not walk the same places twice, and you take home not only memories but also beautiful professional photos by a photographer.",
+      wa_sv2:"Hello Natallia! I would like to discuss help with organising an event.",
+      sv2_t:"Weddings and celebrations",
+      sv2_d:"Help with organising weddings, hen parties and other celebrations and official events.",
+      wa_sv3:"Hello Natallia! I am interested in a transfer around Sicily.",
+      sv3_t:"Transfers around the island",
+      sv3_d:"Transfers around Sicily, so you can get to the town or tour you need without any hassle.",
+      wa_sv4:"Hello Natallia! I would like to plan a route around Sicily.",
+      sv4_t:"Routes around Sicily",
+      sv4_d:"Planning and organising travel routes around the island.",
+      cta_discuss:"Let’s talk",
+      sv_eyebrow:"Extra services",
+      sv_title:"More than tours",
+      sv_lead:"I can help make your trip to Sicily easy and beautiful: from a photo shoot to a route around the whole island.",
+      near_also:"Also near Palermo:",
+      nav_around:"Day trips",
+      nav_services:"Services",
+      gift_pick:"Which tour would you like to give?",
+      gp_palermo:"Palermo",
+      gp_monreale:"Monreale",
+      gp_cefalu:"Cefalù",
+      gp_caccamo:"Caccamo",
+      cert_palermo:"A walk through Palermo",
+      cert_monreale:"A tour of Monreale",
+      cert_cefalu:"A tour of Cefalù",
+      cert_caccamo:"A tour of Caccamo",
+      wa_gift_palermo:"Hello Natallia! I would like to give the Palermo highlights tour as a gift.",
+      wa_gift_monreale:"Hello Natallia! I would like to give the Monreale tour as a gift.",
+      wa_gift_cefalu:"Hello Natallia! I would like to give the Cefalù tour as a gift.",
+      wa_gift_caccamo:"Hello Natallia! I would like to give the Caccamo tour as a gift.",
+      open_photo:"Open photo",
+      prev:"Previous",
+      next:"Next",
       title:"Natallia · Palermo guide"
     }
   };
@@ -931,6 +1317,35 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   addEventListener("keydown",e=>{ if(e.key==="Escape" && document.body.classList.contains("menu-open")) setMenu(false); });
   addEventListener("resize",()=>{ if(innerWidth>980 && document.body.classList.contains("menu-open")) setMenu(false); });
 
+  // ---------- LIGHTBOX ----------
+  const GAL={
+    massimo:["img/s-massimo.jpg"],
+    cathedral:["img/cathedral.jpg"],
+    pretoria:["img/s-pretoria-1.jpg","img/s-canti-1.jpg","img/s-pretoria-2.jpg","img/s-canti-2.jpg"],
+    martorana:["img/martorana.jpg"],
+    caterina:["img/s-caterina-1.jpg","img/s-caterina-2.jpg","img/s-caterina-3.jpg","img/s-caterina-4.jpg"],
+    lorenzo:["img/s-lorenzo-1.jpg","img/s-lorenzo-2.jpg","img/s-lorenzo-3.jpg"],
+    monreale:[1,2,3,4,5,6,7,8].map(n=>"img/mon-"+n+".jpg"),
+    cefalu:[1,2,3,4,5,6,7,8,9].map(n=>"img/cef-"+n+".jpg"),
+    caccamo:["img/cac-1.jpg"]
+  };
+  const lb=document.getElementById("lb"), lbImg=document.getElementById("lbImg"), lbC=document.getElementById("lbC");
+  let lbList=[], lbI=0, lbBack=null;
+  function lbShow(i){ lbI=(i+lbList.length)%lbList.length; lbImg.src=lbList[lbI]; lbC.textContent=(lbI+1)+" / "+lbList.length;
+    const nx=new Image(); nx.src=lbList[(lbI+1)%lbList.length]; }
+  function lbOpen(g,i,from){ lbList=GAL[g]||[]; if(!lbList.length) return; lbBack=from||null;
+    lb.hidden=false; lb.classList.toggle("single",lbList.length<2); document.body.classList.add("lb-on"); document.body.style.overflow="hidden";
+    lbShow(i||0); requestAnimationFrame(()=>lb.classList.add("open")); document.getElementById("lbX").focus({preventScroll:true}); }
+  function lbClose(){ lb.classList.remove("open"); document.body.style.overflow=""; setTimeout(()=>{lb.hidden=true;lbImg.removeAttribute("src");},300); if(lbBack) lbBack.focus({preventScroll:true}); }
+  document.addEventListener("click",e=>{ const t=e.target.closest("[data-g]"); if(t){ e.preventDefault(); lbOpen(t.dataset.g,+t.dataset.i||0,t); } });
+  document.getElementById("lbX").addEventListener("click",lbClose);
+  document.getElementById("lbP").addEventListener("click",()=>lbShow(lbI-1));
+  document.getElementById("lbN").addEventListener("click",()=>lbShow(lbI+1));
+  lb.addEventListener("click",e=>{ if(e.target===lb || e.target.tagName==="FIGURE") lbClose(); });
+  addEventListener("keydown",e=>{ if(lb.hidden) return; if(e.key==="Escape") lbClose(); else if(e.key==="ArrowLeft") lbShow(lbI-1); else if(e.key==="ArrowRight") lbShow(lbI+1); });
+  let tx=null; lb.addEventListener("touchstart",e=>{tx=e.touches[0].clientX},{passive:true});
+  lb.addEventListener("touchend",e=>{ if(tx==null) return; const dx=e.changedTouches[0].clientX-tx; if(Math.abs(dx)>50) lbShow(lbI+(dx<0?1:-1)); tx=null; });
+
   // duplicate marquee for seamless loop
   const track=document.getElementById("track"); track.innerHTML += track.innerHTML;
 
@@ -977,6 +1392,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     });
     cert.parentElement.addEventListener("pointerleave",()=>{cert.style.transform="";});
   }
+  // ---------- GIFT PICKER ----------
+  const giftPick=document.getElementById("giftPick"), giftBtn=document.getElementById("giftBtn"), certT=document.getElementById("certT");
+  giftPick.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    const k=b.dataset.k, d=T[lang];
+    giftPick.querySelectorAll("button").forEach(x=>x.setAttribute("aria-checked", x===b));
+    certT.dataset.i18n="cert_"+k; certT.textContent=d["cert_"+k];
+    giftBtn.dataset.wa="gift_"+k; giftBtn.href="https://wa.me/"+PHONE+"?text="+encodeURIComponent(d["wa_gift_"+k]);
+    cert.animate([{transform:"rotate(-4deg) scale(.96)",opacity:.6},{transform:"rotate(-4deg) scale(1)",opacity:1}],{duration:450,easing:"cubic-bezier(.2,.7,.1,1)"});
+  }));
 })();
 </script>
 </body>
