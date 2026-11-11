@@ -33,6 +33,11 @@ async function tg(env, method, body) {
   return r.json();
 }
 
+async function sha(t) {
+  const h = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t));
+  return [...new Uint8Array(h)].slice(0, 12).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
 const getApproved = async (env) => JSON.parse((await env.REVIEWS.get("approved")) || "[]");
 
 export default {
@@ -64,28 +69,68 @@ export default {
       const rating = parseInt(b.rating, 10) || 0;
       if (!name || text.length < 10 || rating < 1 || rating > 5) return json({ ok: false, error: "invalid" }, 400, cors);
 
-      // не чаще одного отзыва в минуту с одного адреса
+      // Защита от спама. Метки ставим только ПОСЛЕ успешной отправки в Telegram,
+      // чтобы неудачная попытка не блокировала следующую.
+      //  - dup:  тот же отзыв (адрес + имя + текст) повторно за 10 минут -> «уже отправлен»
+      //  - rl:   не больше 3 отзывов за 10 минут с одного адреса (дома/в мобильной сети
+      //          один адрес часто делят несколько устройств и людей)
       const ip = request.headers.get("CF-Connecting-IP") || "unknown";
-      if (await env.REVIEWS.get("ip:" + ip)) return json({ ok: false, error: "slow_down" }, 429, cors);
-      await env.REVIEWS.put("ip:" + ip, "1", { expirationTtl: 60 });
+      const dupKey = "dup:" + (await sha(ip + "|" + name.toLowerCase() + "|" + text.toLowerCase()));
+      const rlKey = "rl:" + ip;
+      if (await env.REVIEWS.get(dupKey)) return json({ ok: true, duplicate: true }, 200, cors);
+      const count = parseInt((await env.REVIEWS.get(rlKey)) || "0", 10);
+      if (count >= 3) return json({ ok: false, error: "slow_down" }, 429, cors);
 
       const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
       const review = { id, name, text, rating, date: new Date().toISOString() };
-      await env.REVIEWS.put("p:" + id, JSON.stringify(review), { expirationTtl: 60 * 60 * 24 * 60 });
 
-      const sent = await tg(env, "sendMessage", {
-        chat_id: env.TG_CHAT_ID,
-        parse_mode: "HTML",
-        text: reviewText("📝 <b>Новый отзыв</b>", review),
-        reply_markup: {
-          inline_keyboard: [[
-            { text: "✅ Одобрить", callback_data: "a:" + id },
-            { text: "❌ Отклонить", callback_data: "r:" + id },
-          ]],
-        },
-      });
-      if (!sent.ok) return json({ ok: false, error: "telegram" }, 502, cors);
+      let sent;
+      try {
+        sent = await tg(env, "sendMessage", {
+          chat_id: env.TG_CHAT_ID,
+          parse_mode: "HTML",
+          text: reviewText("📝 <b>Новый отзыв</b>", review),
+          reply_markup: {
+            inline_keyboard: [[
+              { text: "✅ Одобрить", callback_data: "a:" + id },
+              { text: "❌ Отклонить", callback_data: "r:" + id },
+            ]],
+          },
+        });
+      } catch (e) {
+        sent = { ok: false, description: String(e && e.message || e) };
+      }
+      if (!sent.ok) {
+        console.log("telegram error:", JSON.stringify(sent));
+        return json({ ok: false, error: "telegram", detail: sent.description || "" }, 502, cors);
+      }
+
+      await env.REVIEWS.put("p:" + id, JSON.stringify(review), { expirationTtl: 60 * 60 * 24 * 60 });
+      await env.REVIEWS.put(dupKey, "1", { expirationTtl: 600 });
+      await env.REVIEWS.put(rlKey, String(count + 1), { expirationTtl: 600 });
       return json({ ok: true }, 200, cors);
+    }
+
+    // ---- проверка настроек: откройте /health в браузере ----
+    if (request.method === "GET" && path === "/health") {
+      const out = { worker: true, kv: false, token: false, chat: false, webhook: null, errors: [] };
+      try { await env.REVIEWS.get("approved"); out.kv = true; } catch (e) { out.errors.push("KV: привязка REVIEWS не найдена"); }
+      if (!env.TG_TOKEN) out.errors.push("Нет переменной TG_TOKEN");
+      if (!env.TG_CHAT_ID) out.errors.push("Нет переменной TG_CHAT_ID");
+      if (env.TG_TOKEN) {
+        try {
+          const me = await tg(env, "getMe", {});
+          out.token = !!me.ok; if (!me.ok) out.errors.push("Токен бота: " + (me.description || "не принят"));
+          if (me.ok && env.TG_CHAT_ID) {
+            const ch = await tg(env, "getChat", { chat_id: env.TG_CHAT_ID });
+            out.chat = !!ch.ok; if (!ch.ok) out.errors.push("Чат: " + (ch.description || "не найден") + " (напишите боту /start с нужного аккаунта и проверьте TG_CHAT_ID)");
+          }
+          const wh = await tg(env, "getWebhookInfo", {});
+          if (wh.ok) out.webhook = wh.result.url ? (wh.result.last_error_message ? "ошибка: " + wh.result.last_error_message : "ок") : "не установлен";
+        } catch (e) { out.errors.push("Telegram недоступен: " + (e && e.message || e)); }
+      }
+      out.allow_origin = env.ALLOW_ORIGIN || "*";
+      return new Response(JSON.stringify(out, null, 2), { headers: { "Content-Type": "application/json; charset=utf-8", ...cors } });
     }
 
     // ---- события из Telegram ----

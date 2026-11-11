@@ -989,7 +989,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       rev_empty_t:"Здесь появятся отзывы гостей",rev_empty_s:"Станьте первым, кто расскажет о своей экскурсии.",
       rev_form_t:"Оставить отзыв",rev_name:"Ваше имя",rev_rating:"Оценка",rev_text:"Ваш отзыв",rev_text_ph:"Что запомнилось больше всего?",rev_send:"Отправить отзыв",rev_sending:"Отправляю…",
       rev_note:"Отзыв появится на сайте после того, как Наталья его прочитает.",rev_thanks:"Спасибо! Отзыв отправлен Наталье на проверку.",rev_thanks_demo:" Демо-режим: пока отзыв виден только вам.",
-      rev_err_fill:"Укажите имя и напишите хотя бы пару предложений.",rev_err_rating:"Поставьте оценку звёздами.",rev_err_wait:"Вы только что отправили отзыв. Подождите минуту и попробуйте снова.",rev_err_send:"Не получилось отправить. Попробуйте ещё раз чуть позже.",rev_own:"Виден только вам (демо)",
+      rev_err_fill:"Укажите имя и напишите хотя бы пару предложений.",rev_err_rating:"Поставьте оценку звёздами.",rev_err_wait:"С вашего адреса уже отправили несколько отзывов подряд. Попробуйте через 10 минут.",rev_dup:"Этот отзыв уже отправлен Наталье, спасибо!",rev_err_send:"Не получилось отправить. Попробуйте ещё раз чуть позже.",rev_own:"Виден только вам (демо)",
       gift_eyebrow:"Подарок",gift_title:"Подарите экскурсию на Сицилии",gift_lead:"Экскурсия в подарок для мамы, подруги, любимого человека или друзей, которые собираются на Сицилию. Подарок, который запомнится надолго.",
       g1b:"Напишите мне",g1s:"В WhatsApp или Telegram, кому хотите сделать подарок",g2b:"Обсудим детали",g2s:"Формат экскурсии и примерные даты поездки",g3b:"Дарите",g3s:"Красивый сертификат для вашего близкого человека",
       cert_s:"Подарочный сертификат",cert_for:"Для",
@@ -1109,7 +1109,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       rev_empty_t:"Guest reviews will appear here",rev_empty_s:"Be the first to tell others about your tour.",
       rev_form_t:"Leave a review",rev_name:"Your name",rev_rating:"Rating",rev_text:"Your review",rev_text_ph:"What stayed with you the most?",rev_send:"Send review",rev_sending:"Sending…",
       rev_note:"Your review will appear on the site once Natallia has read it.",rev_thanks:"Thank you! Your review has been sent to Natallia for approval.",rev_thanks_demo:" Demo mode: for now only you can see it.",
-      rev_err_fill:"Please add your name and a few sentences.",rev_err_rating:"Please rate your walk with the stars.",rev_err_wait:"You have just sent a review. Please wait a minute and try again.",rev_err_send:"Could not send it. Please try again a little later.",rev_own:"Only visible to you (demo)",
+      rev_err_fill:"Please add your name and a few sentences.",rev_err_rating:"Please rate your walk with the stars.",rev_err_wait:"Several reviews have just been sent from your network. Please try again in 10 minutes.",rev_dup:"This review has already been sent to Natallia, thank you!",rev_err_send:"Could not send it. Please try again a little later.",rev_own:"Only visible to you (demo)",
       gift_eyebrow:"Gift",gift_title:"Give a tour in Sicily",gift_lead:"A tour as a gift for your mum, a friend, your partner or anyone heading to Sicily. A present they will remember for a long time.",
       g1b:"Write to me",g1s:"On WhatsApp or Telegram, and tell me who the gift is for",g2b:"We agree the details",g2s:"The tour format and rough travel dates",g3b:"Give it",g3s:"A beautiful certificate for someone you love",
       cert_s:"Gift certificate",cert_for:"For",
@@ -1293,8 +1293,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     try{
       if(REVIEWS_API){
         const r=await fetch(REVIEWS_API.replace(/\/$/,"")+"/submit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,text,rating,website:""})});
-        if(!r.ok) throw new Error(r.status===429 ? "wait" : "http "+r.status);
-        say(d.rev_thanks,"ok");
+        let res={}; try{ res=await r.json(); }catch(_){}
+        if(!r.ok){ if(res.detail) console.warn("Отзыв не отправлен:", res.error, res.detail); throw new Error(r.status===429 ? "wait" : "http "+r.status); }
+        say(res.duplicate ? d.rev_dup : d.rev_thanks,"ok");
       } else {
         const own=readOwn(); own.unshift(review);
         try{localStorage.setItem("rev_demo",JSON.stringify(own.slice(0,20)))}catch(_){}
