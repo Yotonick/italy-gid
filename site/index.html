@@ -1266,7 +1266,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   }
   async function loadReviews(){
     if(REVIEWS_API){
-      try{ const r=await fetch(REVIEWS_API.replace(/\/$/,"")+"/approved"); if(r.ok){ const a=await r.json(); revData=Array.isArray(a)?a:[]; } }catch(e){}
+      try{ const r=await fetch(REVIEWS_API.replace(/\/$/,"")+"/approved",{cache:"no-store"}); if(r.ok){ const a=await r.json(); revData=Array.isArray(a)?a:[]; } }catch(e){}
     } else {
       revData=readOwn().map(x=>({...x,own:true}));
     }
