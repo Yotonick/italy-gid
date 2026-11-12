@@ -135,13 +135,11 @@ body.menu-open{overflow:hidden}
 
 /* MARQUEE */
 .marquee{overflow:hidden;padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.track{display:flex;gap:18px;width:max-content;animation:scroll 85s linear infinite;will-change:transform;backface-visibility:hidden}
-@media (hover:hover){.marquee:hover .track{animation-play-state:paused}}
+.track{display:flex;gap:18px;width:max-content;will-change:transform;backface-visibility:hidden;transform:translate3d(0,0,0)}
 .track figure{height:clamp(170px,22vw,260px);flex:none;border-radius:14px;overflow:hidden}
 .track figure:nth-child(3n+1){border-radius:999px 999px 14px 14px}
 .track img{height:100%;width:auto;transition:transform .8s var(--ease)}
 @media (hover:hover){.track figure:hover img{transform:scale(1.06)}}
-@keyframes scroll{to{transform:translateX(calc(-50% - 9px))}}
 
 /* TOURS */
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;margin-bottom:clamp(40px,6vw,70px)}
@@ -1351,11 +1349,22 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
   // duplicate marquee for seamless loop
   const track=document.getElementById("track"); track.innerHTML += track.innerHTML;
-  // iOS Safari computes the -50% shift when the animation starts; restart it once photos have real widths
-  let mqT; function restartMarquee(){ clearTimeout(mqT); mqT=setTimeout(()=>{ track.style.animation="none"; void track.offsetWidth; track.style.animation=""; },150); }
-  [...track.querySelectorAll("img")].forEach(im=>{ if(!im.complete) im.addEventListener("load",restartMarquee,{once:true}); });
-  addEventListener("load",restartMarquee);
-  let mqW=innerWidth; addEventListener("resize",()=>{ if(innerWidth!==mqW){ mqW=innerWidth; restartMarquee(); } });
+  // marquee: driven by requestAnimationFrame (CSS keyframes jump in iOS Safari)
+  (function(){
+    const mq=track.parentElement, GAP=18, DUR=85; let half=0, x=0, last=0, paused=false;
+    function measure(){ half=track.scrollWidth/2 + GAP/2; }
+    measure();
+    track.querySelectorAll("img").forEach(im=>{ if(!im.complete) im.addEventListener("load",measure,{once:true}); });
+    addEventListener("load",measure); addEventListener("resize",measure);
+    if(matchMedia("(hover:hover)").matches){ mq.addEventListener("mouseenter",()=>paused=true); mq.addEventListener("mouseleave",()=>paused=false); }
+    if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    function step(t){
+      const dt=last?Math.min(t-last,64):0; last=t;
+      if(!paused && half>0){ x+=half/DUR*dt/1000; if(x>=half) x-=half; track.style.transform="translate3d("+(-x).toFixed(2)+"px,0,0)"; }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  })();
 
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
