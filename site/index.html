@@ -135,12 +135,12 @@ body.menu-open{overflow:hidden}
 
 /* MARQUEE */
 .marquee{overflow:hidden;padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.track{display:flex;gap:18px;width:max-content;animation:scroll 85s linear infinite}
-.marquee:hover .track{animation-play-state:paused}
+.track{display:flex;gap:18px;width:max-content;animation:scroll 85s linear infinite;will-change:transform;backface-visibility:hidden}
+@media (hover:hover){.marquee:hover .track{animation-play-state:paused}}
 .track figure{height:clamp(170px,22vw,260px);flex:none;border-radius:14px;overflow:hidden}
 .track figure:nth-child(3n+1){border-radius:999px 999px 14px 14px}
 .track img{height:100%;width:auto;transition:transform .8s var(--ease)}
-.track figure:hover img{transform:scale(1.06)}
+@media (hover:hover){.track figure:hover img{transform:scale(1.06)}}
 @keyframes scroll{to{transform:translateX(calc(-50% - 9px))}}
 
 /* TOURS */
@@ -495,7 +495,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <ul class="nav-links">
       <li><a href="#tours" data-i18n="nav_tours">Экскурсии</a></li>
       <li><a href="#around" data-i18n="nav_around">Окрестности</a></li>
-      <li><a href="#services" data-i18n="nav_services">Услуги</a></li>
+      <li><a href="#services" data-i18n="nav_services">Доп. услуги</a></li>
       <li><a href="#about" data-i18n="nav_about">О себе</a></li>
       <li><a href="#reviews" data-i18n="nav_reviews">Отзывы</a></li>
       <li><a href="#gift" data-i18n="nav_gift">Подарок</a></li>
@@ -518,7 +518,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <ul>
     <li><a href="#tours" data-i18n="nav_tours">Экскурсии</a></li>
     <li><a href="#around" data-i18n="nav_around">Окрестности</a></li>
-    <li><a href="#services" data-i18n="nav_services">Услуги</a></li>
+    <li><a href="#services" data-i18n="nav_services">Доп. услуги</a></li>
     <li><a href="#about" data-i18n="nav_about">О себе</a></li>
     <li><a href="#reviews" data-i18n="nav_reviews">Отзывы</a></li>
     <li><a href="#gift" data-i18n="nav_gift">Подарок</a></li>
@@ -568,27 +568,25 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </section>
 
-<div class="band tiles" aria-hidden="true"></div>
-
 <!-- MARQUEE -->
 <div class="marquee" aria-hidden="true">
   <div class="track" id="track">
-    <figure><img src="img/g1.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="img/g3.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="img/g4.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="img/g5.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="img/g7.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="img/g8.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="img/g6.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="img/g2.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="img/g9.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="img/g10.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="img/g11.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="img/g14.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="img/g12.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="img/g15.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="img/g16.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="img/g13.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="img/g1.jpg" alt="" width="600" height="900" decoding="async"></figure>
+    <figure><img src="img/g3.jpg" alt="" width="900" height="600" decoding="async"></figure>
+    <figure><img src="img/g4.jpg" alt="" width="600" height="900" decoding="async"></figure>
+    <figure><img src="img/g5.jpg" alt="" width="900" height="600" decoding="async"></figure>
+    <figure><img src="img/g7.jpg" alt="" width="600" height="900" decoding="async"></figure>
+    <figure><img src="img/g8.jpg" alt="" width="900" height="600" decoding="async"></figure>
+    <figure><img src="img/g6.jpg" alt="" width="600" height="900" decoding="async"></figure>
+    <figure><img src="img/g2.jpg" alt="" width="900" height="600" decoding="async"></figure>
+    <figure><img src="img/g9.jpg" alt="" width="600" height="900" decoding="async"></figure>
+    <figure><img src="img/g10.jpg" alt="" width="900" height="600" decoding="async"></figure>
+    <figure><img src="img/g11.jpg" alt="" width="1100" height="733" decoding="async"></figure>
+    <figure><img src="img/g14.jpg" alt="" width="733" height="1100" decoding="async"></figure>
+    <figure><img src="img/g12.jpg" alt="" width="1100" height="733" decoding="async"></figure>
+    <figure><img src="img/g15.jpg" alt="" width="1100" height="733" decoding="async"></figure>
+    <figure><img src="img/g16.jpg" alt="" width="733" height="1100" decoding="async"></figure>
+    <figure><img src="img/g13.jpg" alt="" width="1100" height="733" decoding="async"></figure>
   </div>
 </div>
 
@@ -934,7 +932,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </section>
 </main>
 
-<div class="band tiles" aria-hidden="true"></div>
 <footer>
   <div class="wrap">
     <span>© 2026 Natallia · <span data-i18n="foot">Гид в Палермо</span></span>
@@ -1059,7 +1056,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       near_also:"Также рядом с Палермо:",
       near_names:"Монреале · Чефалу · Каккамо",
       nav_around:"Окрестности",
-      nav_services:"Услуги",
+      nav_services:"Доп. услуги",
       gift_pick:"Какую экскурсию подарить?",
       gp_palermo:"Палермо",
       gp_monreale:"Монреале",
@@ -1179,7 +1176,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       near_also:"Also near Palermo:",
       near_names:"Monreale · Cefalù · Caccamo",
       nav_around:"Day trips",
-      nav_services:"Services",
+      nav_services:"Extra services",
       gift_pick:"Which tour would you like to give?",
       gp_palermo:"Palermo",
       gp_monreale:"Monreale",
@@ -1354,6 +1351,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
   // duplicate marquee for seamless loop
   const track=document.getElementById("track"); track.innerHTML += track.innerHTML;
+  // iOS Safari computes the -50% shift when the animation starts; restart it once photos have real widths
+  let mqT; function restartMarquee(){ clearTimeout(mqT); mqT=setTimeout(()=>{ track.style.animation="none"; void track.offsetWidth; track.style.animation=""; },150); }
+  [...track.querySelectorAll("img")].forEach(im=>{ if(!im.complete) im.addEventListener("load",restartMarquee,{once:true}); });
+  addEventListener("load",restartMarquee);
+  let mqW=innerWidth; addEventListener("resize",()=>{ if(innerWidth!==mqW){ mqW=innerWidth; restartMarquee(); } });
 
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
